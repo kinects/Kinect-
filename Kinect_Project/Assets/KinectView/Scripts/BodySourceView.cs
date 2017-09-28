@@ -131,8 +131,6 @@ public class BodySourceView : MonoBehaviour
 
             GhostCreate();
 
-            ShineCreate();
-
             GameEnd();
 
         }
@@ -290,9 +288,7 @@ public class BodySourceView : MonoBehaviour
         if (bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineBase].x &&
             bodyPos[(int)Kinect.JointType.HandLeft].x <= bodyPos[(int)Kinect.JointType.SpineBase].x &&
             bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.Head].y &&
-            bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.Head].y &&
-            bodyPos[(int)Kinect.JointType.HandTipRight].y <= bodyPos[(int)Kinect.JointType.HandRight].y + 0.5f &&
-            bodyPos[(int)Kinect.JointType.HandTipLeft].y <= bodyPos[(int)Kinect.JointType.HandLeft].y + 0.5f )
+            bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.Head].y )
         {
             Debug.Log("いいぞ。");
         }
