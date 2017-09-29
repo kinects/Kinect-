@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Kinect = Windows.Kinect;
 
-public class BatL : MonoBehaviour {
+public class BatsL : MonoBehaviour
+{
 
     private float rad;
     public Vector2 speed = new Vector2(0.2f, 0.2f);
     private Vector2 Position;
     public bool side = true;
+
+    private SpriteRenderer spRenderer;
 
     // Use this for initialization
     void Start()
@@ -53,15 +56,32 @@ public class BatL : MonoBehaviour {
 
         // 現在の位置に加算減算を行ったPositionを代入する
         transform.position = Position;
+
+        if (Smoke.trgsSmoke == true)
+        {
+            Spone.BatLcnt = 0;
+            spRenderer = GameObject.Find("Dracula").GetComponent<SpriteRenderer>();
+            var color = spRenderer.color;
+            color.a = 255;
+            spRenderer.color = color;
+            spRenderer = GameObject.Find("Yokoari").GetComponent<SpriteRenderer>();
+            color = spRenderer.color;
+            color.a = 0;
+            spRenderer.color = color;
+            Smoke.trgsSmoke = false;
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Yokoari")
+        if (other.tag == "Yokoari")
         {
-            Debug.Log("いいぞ。");
-            Spone.BatLcnt = 0;
-            Destroy(gameObject);
+            spRenderer = GetComponent<SpriteRenderer>();
+            var color = spRenderer.color;
+            color.a = 0;
+            spRenderer.color = color;
+            Smoke.trgSmoke = true;
         }
     }
 }

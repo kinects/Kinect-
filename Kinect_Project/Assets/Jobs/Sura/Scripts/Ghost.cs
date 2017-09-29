@@ -41,9 +41,15 @@ public class Ghost : MonoBehaviour {
         //お化けムーブの速さ
         speed = Random.Range(0.0005f, 0.001f);
 
-        //左右を決める
-        dir = Random.Range(0,2);
-        dir = Mathf.Floor(dir);
+        //画面中央より左に出現したら右へ向かう右に出現したら左へ
+        if(transform.position.x > Camera.main.transform.position.x)
+        {
+            dir = 0;
+        }
+        else
+        {
+            dir = 1;
+        }
 
         //消え始めるまでの時間
         time = 5;
@@ -72,10 +78,12 @@ public class Ghost : MonoBehaviour {
         
         if (dir == 0)
         {
+            //左へ移動
             velocity.x += -speed;
         }
         else
         {
+            //右へ移動
             velocity.x += speed;
         }
 

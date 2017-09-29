@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Kinect = Windows.Kinect;
 
-public class BatR : MonoBehaviour {
-    
+public class BatsR : MonoBehaviour
+{
+
     private float rad;
     public Vector2 speed = new Vector2(0.2f, 0.2f);
     private Vector2 Position;
     public bool side = false;
 
+    private SpriteRenderer spRenderer;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         rad = Mathf.Atan2(
         BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].y - transform.position.y,
@@ -24,11 +28,12 @@ public class BatR : MonoBehaviour {
 
         Position = transform.position;
 
-        if(Vector2.Distance(BodySourceView.bodyPos[(int)Kinect.JointType.HandRight], transform.position) < 1.5f)
+        if (Vector2.Distance(BodySourceView.bodyPos[(int)Kinect.JointType.HandRight], transform.position) < 1.5f)
         {
             Position.x += speed.x * Mathf.Cos(rad);
             Position.y += speed.y * Mathf.Sin(rad);
-        }else
+        }
+        else
         {
             if (side == false)
             {
@@ -52,6 +57,21 @@ public class BatR : MonoBehaviour {
         // 現在の位置に加算減算を行ったPositionを代入する
         transform.position = Position;
 
+        if (Smoke.trgsSmoke == true)
+        {
+            Spone.BatRcnt = 0;
+            spRenderer = GameObject.Find("Dracula").GetComponent<SpriteRenderer>();
+            var color = spRenderer.color;
+            color.a = 255;
+            spRenderer.color = color;
+            spRenderer = GameObject.Find("Yokoari").GetComponent<SpriteRenderer>();
+            color = spRenderer.color;
+            color.a = 0;
+            spRenderer.color = color;
+            Smoke.trgsSmoke = false;
+            Destroy(gameObject);
+        }
+
 
     }
 
@@ -59,9 +79,11 @@ public class BatR : MonoBehaviour {
     {
         if (other.tag == "Yokoari")
         {
-            Debug.Log("いいぞ。");
-            Spone.BatRcnt = 0;
-            Destroy(gameObject);
+            spRenderer = GetComponent<SpriteRenderer>();
+            var color = spRenderer.color;
+            color.a = 0;
+            spRenderer.color = color;
+            Smoke.trgSmoke = true;
         }
     }
 }
