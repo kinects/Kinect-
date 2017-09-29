@@ -45,7 +45,7 @@ public class Spone : MonoBehaviour {
                 {
 
                     x = Random.Range(-120f, 120f);
-                    y = Random.Range(-120f, 120f);
+                    y = Random.Range(-100f, 100f);
                     z = 149f;
 
                     Instantiate(ghost, new Vector3(x, y, z), Quaternion.identity);

@@ -64,10 +64,20 @@ public class BatsL : MonoBehaviour
             var color = spRenderer.color;
             color.a = 255;
             spRenderer.color = color;
-            spRenderer = GameObject.Find("Yokoari").GetComponent<SpriteRenderer>();
-            color = spRenderer.color;
-            color.a = 0;
-            spRenderer.color = color;
+            if (Hocken.Hockenswitch == true)
+            {
+                spRenderer = GameObject.Find("Hocken").GetComponent<SpriteRenderer>();
+                color = spRenderer.color;
+                color.a = 0;
+                spRenderer.color = color;
+            }
+            else
+            {
+                spRenderer = GameObject.Find("Yokoari").GetComponent<SpriteRenderer>();
+                color = spRenderer.color;
+                color.a = 0;
+                spRenderer.color = color;
+            }
             Smoke.trgsSmoke = false;
             Destroy(gameObject);
         }
