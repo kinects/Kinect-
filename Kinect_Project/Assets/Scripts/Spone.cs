@@ -12,7 +12,8 @@ public class Spone : MonoBehaviour {
     public bool trgBatsR = false;
     public bool trgBatsL = false;
 
-    public static int BatRcnt = 0;  //コウモリの出ている数
+    //コウモリの出ている数
+    public static int BatRcnt = 0;  
     public static int BatLcnt = 0;
 
     private float x = 0;
@@ -44,7 +45,7 @@ public class Spone : MonoBehaviour {
                 {
 
                     x = Random.Range(-120f, 120f);
-                    y = Random.Range(-120f, 120f);
+                    y = Random.Range(-100f, 100f);
                     z = 149f;
 
                     Instantiate(ghost, new Vector3(x, y, z), Quaternion.identity);
