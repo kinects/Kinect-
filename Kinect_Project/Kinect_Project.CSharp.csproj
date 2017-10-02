@@ -84,6 +84,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Jobs\Sura\Scripts\Yokoari.cs" />
+    <Compile Include="Assets\Jobs\abe\Scripts\BatsL.cs" />
+    <Compile Include="Assets\Jobs\abe\Scripts\BatsR.cs" />
+    <Compile Include="Assets\Jobs\abe\Scripts\Hocken.cs" />
+    <Compile Include="Assets\Jobs\abe\Scripts\Smoke.cs" />
     <Compile Include="Assets\KinectView\Scripts\BodySourceManager.cs" />
     <Compile Include="Assets\KinectView\Scripts\BodySourceView.cs" />
     <Compile Include="Assets\KinectView\Scripts\ColorSourceManager.cs" />
@@ -95,10 +100,11 @@
     <Compile Include="Assets\KinectView\Scripts\InfraredSourceView.cs" />
     <Compile Include="Assets\KinectView\Scripts\MultiSourceManager.cs" />
     <Compile Include="Assets\KinectView\Scripts\ResultMove.cs" />
-    <Compile Include="Assets\Scripts\BatL.cs" />
-    <Compile Include="Assets\Scripts\BatR.cs" />
     <Compile Include="Assets\Scripts\Ghost.cs" />
     <Compile Include="Assets\Scripts\Spone.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\AddTag.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
