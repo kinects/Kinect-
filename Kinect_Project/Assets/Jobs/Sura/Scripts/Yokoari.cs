@@ -40,7 +40,7 @@ public class Yokoari : MonoBehaviour {
         //目的のタグを持つやつがいるか判定
         if(nearObj != null)
         {
-            GhostTracking();
+            //GhostTracking();
         }
         else
         {
@@ -79,7 +79,7 @@ public class Yokoari : MonoBehaviour {
         }
         //一番近かったオブジェクトを返す
         return GameObject.Find(nearObjName);
-        return targetObj;
+        //return targetObj;
 
     }
 

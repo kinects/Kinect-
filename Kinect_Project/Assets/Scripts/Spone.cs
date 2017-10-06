@@ -48,6 +48,8 @@ public class Spone : MonoBehaviour {
                     y = Random.Range(-100f, 100f);
                     z = 149f;
 
+                    Hocken.Ghostswitch = true;
+
                     Instantiate(ghost, new Vector3(x, y, z), Quaternion.identity);
                 }
 
