@@ -9,16 +9,17 @@ public class BodySourceView : MonoBehaviour
     public Material BoneMaterial;
     public GameObject BodySourceManager;
 
-    public float timeElapsed = 0;
-
-    public int batcnt = 0;
-
     public static Vector3[] bodyPos = new Vector3[25];
     private ulong active = 0;
     
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
-    
+
+    public float timeElapsed = 0;
+    public int batcnt = 0;
+
+    public float a;
+
     private Dictionary<Kinect.JointType, Kinect.JointType> _BoneMap = new Dictionary<Kinect.JointType, Kinect.JointType>()
     {
         { Kinect.JointType.FootLeft, Kinect.JointType.AnkleLeft },
@@ -105,7 +106,7 @@ public class BodySourceView : MonoBehaviour
                 active = 0;
                 continue;
             }
-
+            
             if (active != body.TrackingId && active != 0)
             {
                 continue;
@@ -121,6 +122,7 @@ public class BodySourceView : MonoBehaviour
                 RefreshBodyObject(body, _Bodies[body.TrackingId]);
                 active = body.TrackingId;
             }
+
         }
         if (bodyTrg == true)
         {
@@ -138,6 +140,7 @@ public class BodySourceView : MonoBehaviour
         }
     }
     
+    //体を認識してボーンを生成する
     private GameObject CreateBodyObject(ulong id)
     {
         GameObject body = new GameObject("Body:" + id);
@@ -149,7 +152,7 @@ public class BodySourceView : MonoBehaviour
             LineRenderer lr = jointObj.AddComponent<LineRenderer>();
             lr.SetVertexCount(2);
             lr.material = BoneMaterial;
-            lr.SetWidth(0.05f, 0.05f);
+            lr.SetWidth(0.5f, 0.5f);
             
             jointObj.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             jointObj.name = jt.ToString();
@@ -166,7 +169,7 @@ public class BodySourceView : MonoBehaviour
     private void RefreshBodyObject(Kinect.Body body, GameObject bodyObject)
     {
 
-        Transform jointObj;
+        //Transform jointObj;
         Vector3[] joypos = new Vector3[24];
         int joycnt = 0;
         Kinect.JointType[] joytype = new Kinect.JointType[24];
@@ -181,20 +184,23 @@ public class BodySourceView : MonoBehaviour
             {
                 targetJoint = body.Joints[_BoneMap[jt]];
             }
-            
 
 
-            jointObj = bodyObject.transform.Find(jt.ToString());
+
+            Transform jointObj = bodyObject.transform.Find(jt.ToString());
             jointObj.localPosition = GetVector3FromJoint(sourceJoint);
 
+            jointObj.localPosition += new Vector3((0.25f), 0, 0);
+            jointObj.localPosition += new Vector3((jointObj.localPosition.x) * a, 0, 0);
+            
             bodyPos[(int)jt] = jointObj.position;
             joycnt++;
-
+            
             LineRenderer lr = jointObj.GetComponent<LineRenderer>();
             if(targetJoint.HasValue)
             {
                 lr.SetPosition(0, jointObj.localPosition);
-                lr.SetPosition(1, GetVector3FromJoint(targetJoint.Value));
+                lr.SetPosition(1, (GetVector3FromJoint(targetJoint.Value) + new Vector3((0.25f), 0, 0)) + new Vector3((GetVector3FromJoint(targetJoint.Value).x + 0.25f) * a, 0, 0));
                 lr.SetColors(GetColorForState (sourceJoint.TrackingState), GetColorForState(targetJoint.Value.TrackingState));
             }
             else
@@ -225,6 +231,7 @@ public class BodySourceView : MonoBehaviour
         return new Vector3(joint.Position.X * 10, joint.Position.Y * 10, joint.Position.Z * 10);
     }
 
+    //右手に集まってくるコウモリを出現させる
     void BatsCreateR()
     {
         //がおーポーズ(右手が上)
@@ -243,6 +250,7 @@ public class BodySourceView : MonoBehaviour
         }
     }
 
+    //左手に集まってくるコウモリを出現させる
     void BatsCreateL()
     {
         //がおーポーズ(左手が上)
@@ -261,6 +269,7 @@ public class BodySourceView : MonoBehaviour
         }
     }
 
+    //オバケを出現させる
     void GhostCreate()
     {
         //おばけポーズ
@@ -284,6 +293,7 @@ public class BodySourceView : MonoBehaviour
         }
     }
 
+    //キラキラを出現させる
     void ShineCreate()
     {
         //威嚇(?)ポーズ
@@ -298,6 +308,7 @@ public class BodySourceView : MonoBehaviour
         }
     }
 
+    //ゲームを終了させる
     void GameEnd()
     {
         //横に手を広げている時
