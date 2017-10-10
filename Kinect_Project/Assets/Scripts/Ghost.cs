@@ -125,6 +125,7 @@ public class Ghost : MonoBehaviour {
         //見えなくなったら消す
         if(trg == true && alpha <= 0)
         {
+            Hocken.Ghostswitch = false;
             Destroy(this.gameObject);
         }
 

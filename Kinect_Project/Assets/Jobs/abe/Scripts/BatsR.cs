@@ -60,10 +60,15 @@ public class BatsR : MonoBehaviour
         if (Smoke.trgsSmoke == true)
         {
             Spone.BatRcnt = 0;
-            spRenderer = GameObject.Find("Dracula").GetComponent<SpriteRenderer>();
             var color = spRenderer.color;
-            color.a = 255;
-            spRenderer.color = color;
+
+            if (Hocken.DraSwitch == false)
+            {
+                spRenderer = GameObject.Find("Dracula").GetComponent<SpriteRenderer>();
+                color = spRenderer.color;
+                color.a = 255;
+                spRenderer.color = color;
+            }
             if (Hocken.Hockenswitch == true)
             {
                 spRenderer = GameObject.Find("Hocken").GetComponent<SpriteRenderer>();
