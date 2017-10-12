@@ -18,6 +18,12 @@ public class BodySourceView : MonoBehaviour
     public float timeElapsed = 0;
     public int batcnt = 0;
 
+    public float len = 0;
+    public float len2 = 0;
+
+    private int candyCnt = 0;
+
+
     public float a;
 
     private Dictionary<Kinect.JointType, Kinect.JointType> _BoneMap = new Dictionary<Kinect.JointType, Kinect.JointType>()
@@ -303,6 +309,26 @@ public class BodySourceView : MonoBehaviour
             Debug.Log("いいぞ。");
         }
     }
+
+    void CandyCreate()
+    {
+        len = ((bodyPos[(int)Kinect.JointType.WristRight].x - bodyPos[(int)Kinect.JointType.WristLeft].x) * (bodyPos[(int)Kinect.JointType.WristRight].x - bodyPos[(int)Kinect.JointType.WristLeft].x) +
+               (bodyPos[(int)Kinect.JointType.WristRight].y - bodyPos[(int)Kinect.JointType.WristLeft].y) - (bodyPos[(int)Kinect.JointType.WristRight].y - bodyPos[(int)Kinect.JointType.WristLeft].y));
+
+        len2 = ((bodyPos[(int)Kinect.JointType.HandTipRight].x - bodyPos[(int)Kinect.JointType.HandTipLeft].x) * (bodyPos[(int)Kinect.JointType.HandRight].x - bodyPos[(int)Kinect.JointType.HandTipLeft].x) +
+               (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.HandTipLeft].y) - (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.HandTipLeft].y));
+        if (Mathf.Sqrt(len) <= 0.5f && Mathf.Sqrt(len2) <= 1.0f && bodyPos[(int)Kinect.JointType.HandTipLeft].z <= bodyPos[(int)Kinect.JointType.WristLeft].z)
+        {
+            Debug.Log("皿");
+            FindObjectOfType<Spone>().trgCandy = true;
+        }
+        else
+        {
+            FindObjectOfType<Spone>().trgCandy = false;
+        }
+
+    }
+
 
     //ゲームを終了させる
     void GameEnd()

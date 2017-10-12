@@ -7,15 +7,20 @@ public class Spone : MonoBehaviour {
     public GameObject ghost;
     public GameObject batsR;
     public GameObject batsL;
+    public GameObject candy;
+    public GameObject pumpkin;
 
     public bool trgGhost = false;
     public bool trgBatsR = false;
     public bool trgBatsL = false;
+    public bool trgCandy = false;
 
     //コウモリの出ている数
     public static int BatRcnt = 0;  
     public static int BatLcnt = 0;
 
+    private int count = 0;
+    private bool ONE = true;
     private float x = 0;
     private float y = 0;
     private float z = 0;

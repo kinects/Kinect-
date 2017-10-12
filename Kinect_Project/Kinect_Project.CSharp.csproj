@@ -105,10 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AddTag.txt" />
-    <None Include="Assets\Jobs\Gozi\BodySourceView_Candy.txt" />
-    <None Include="Assets\Jobs\Gozi\BodySourceView_pumpkin.txt" />
-    <None Include="Assets\Jobs\Gozi\Spone_Candy.txt" />
-    <None Include="Assets\Jobs\Misawa\flameソース.txt" />
+    <None Include="Assets\Jobs\Gozi\memo\BodySourceView_Candy.txt" />
+    <None Include="Assets\Jobs\Gozi\memo\BodySourceView_pumpkin.txt" />
+    <None Include="Assets\Jobs\Gozi\memo\Spone_Candy.txt" />
+    <None Include="Assets\Jobs\Misawa\memo\flameソース.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
