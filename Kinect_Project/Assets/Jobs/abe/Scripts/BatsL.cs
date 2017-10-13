@@ -8,7 +8,7 @@ public class BatsL : MonoBehaviour
 
     private float rad;
     public Vector2 speed = new Vector2(0.2f, 0.2f);
-    private Vector2 Position;
+    private Vector3 Position;
     public bool side = true;
 
     private SpriteRenderer spRenderer;

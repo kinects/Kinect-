@@ -76,7 +76,7 @@ public class Spone : MonoBehaviour {
                     {
                         x = 15;
                         y = Random.Range(5, 7);
-                        z = 1f;
+                        z = 10f;
 
                         Instantiate(batsR, new Vector3(x, y, z), Quaternion.identity);
                         BatRcnt++;
@@ -95,7 +95,7 @@ public class Spone : MonoBehaviour {
                     {
                         x = -15;
                         y = Random.Range(5,7);
-                        z = 1f;
+                        z = 10f;
 
                         Instantiate(batsL, new Vector3(x, y, z), Quaternion.identity);
                         BatLcnt++;
