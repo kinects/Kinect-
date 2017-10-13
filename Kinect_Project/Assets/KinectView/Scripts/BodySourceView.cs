@@ -309,13 +309,10 @@ public class BodySourceView : MonoBehaviour
     //キラキラを出現させる
     void ShineCreate()
     {
-        //威嚇(?)ポーズ
-        if (bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineBase].x &&
-            bodyPos[(int)Kinect.JointType.HandLeft].x <= bodyPos[(int)Kinect.JointType.SpineBase].x &&
-            bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.Head].y &&
-            bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.Head].y )
+        if(bodyPos[(int)Kinect.JointType.ThumbLeft].y > bodyPos[(int)Kinect.JointType.HandLeft].y + 0.5f &&
+           bodyPos[(int)Kinect.JointType.HandLeft].z > bodyPos[(int)Kinect.JointType.ElbowLeft].z - 1.5f)
         {
-            Debug.Log("いいぞ。");
+            FindObjectOfType<Spone>().trgShine = true;
         }
     }
 
@@ -375,9 +372,6 @@ public class BodySourceView : MonoBehaviour
             bodyPos[(int)Kinect.JointType.HandRight].z < bodyPos[(int)Kinect.JointType.ElbowRight].z - 1.5f)
         {
             FindObjectOfType<Spone>().trgFire = true;
-        }else
-        {
-            FindObjectOfType<Spone>().trgFire = false;
         }
     }
 

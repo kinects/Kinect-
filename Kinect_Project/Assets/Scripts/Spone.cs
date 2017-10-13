@@ -11,19 +11,24 @@ public class Spone : MonoBehaviour {
     public GameObject candy;
     public GameObject pumpkin;
     public GameObject fire;
+    public GameObject shine;
 
     public bool trgGhost = false;
     public bool trgBatsR = false;
     public bool trgBatsL = false;
     public bool trgCandy = false;
     public bool trgFire = false;
+    public bool trgShine = false;
 
     //コウモリの出ている数
     public static int BatRcnt = 0;  
     public static int BatLcnt = 0;
 
     //炎が既にでているかどうかのスイッチ
-    public static bool fireswtich = false;
+    public static bool fireswitch = false;
+
+    //キラキラがすでに出ているかどうかのスイッチ
+    public static bool shineswitch = false;
 
     private int count = 0;
     private bool ONE = true;
@@ -34,6 +39,8 @@ public class Spone : MonoBehaviour {
     //n秒ごとに実行する
     public float sTime = 2;
     public float time;
+    public float firetime = 0;
+    public float shinetime = 0;
 
     // Use this for initialization
     void Start()
@@ -110,18 +117,42 @@ public class Spone : MonoBehaviour {
 
         if(trgFire == true)
         {
-            if (fireswtich == false)
+            if (fireswitch == false)
             {
                 Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
-                fireswtich = true;
+                fireswitch = true;
             }else
             {
                 GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
+                firetime += Time.deltaTime;
             }
-        }else
+        }
+        if(firetime > 5)
         {
-            fireswtich = false;
+            fireswitch = false;
+            firetime = 0;
+            trgFire = false;
             Destroy(GameObject.Find("Fire(Clone)"));
+        }
+        if (trgShine == true)
+        {
+            if (shineswitch == false)
+            {
+                Instantiate(shine, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
+                shineswitch = true;
+            }
+            else
+            {
+                GameObject.Find("Shine(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
+                shinetime += Time.deltaTime;
+            }
+        }
+        if (shinetime > 5)
+        {
+            shineswitch = false;
+            shinetime = 0;
+            trgShine = false;
+            Destroy(GameObject.Find("Shine(Clone)"));
         }
     }
 }
