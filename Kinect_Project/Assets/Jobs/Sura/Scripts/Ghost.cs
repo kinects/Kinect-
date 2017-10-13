@@ -22,6 +22,10 @@ public class Ghost : MonoBehaviour {
 
     //色のやつ
     float red, green, blue;
+    float red02, green02, blue02;
+    float red03, green03, blue03;
+    float red04, green04, blue04;
+    float red05, green05, blue05;
 
     //移動ベクトル
     Vector3 velocity;
@@ -34,20 +38,21 @@ public class Ghost : MonoBehaviour {
 
     void Start()
     {
-        red = GetComponent<SpriteRenderer>().color.r;
-        green = GetComponent<SpriteRenderer>().color.g;
-        blue = GetComponent<SpriteRenderer>().color.b;
-        
+        //オバケの各マテリアルの色を取得
+        RendColor();
+
         //お化けムーブの速さ
         speed = Random.Range(0.0005f, 0.001f);
 
         //画面中央より左に出現したら右へ向かう右に出現したら左へ
         if(transform.position.x > Camera.main.transform.position.x)
         {
+            transform.rotation = Quaternion.Euler(0.0f, 135f, 0.0f);
             dir = 0;
         }
         else
         {
+            transform.rotation = Quaternion.Euler(0.0f, 45f, 0.0f);
             dir = 1;
         }
 
@@ -58,7 +63,11 @@ public class Ghost : MonoBehaviour {
     void Update()
     {
         //色の設定のやつ
-        GetComponent<SpriteRenderer>().color = new Color(red, green, blue, alpha);
+        GetComponent<Renderer>().materials[0].color = new Color(red, green, blue, alpha);
+        GetComponent<Renderer>().materials[1].color = new Color(red02, green02, blue02, alpha);
+        GetComponent<Renderer>().materials[2].color = new Color(red03, green03, blue03, alpha);
+        GetComponent<Renderer>().materials[3].color = new Color(red04, green04, blue04, alpha);
+        GetComponent<Renderer>().materials[4].color = new Color(red05, green05, blue05, alpha);
 
         velocity.y = Mathf.Cos(Time.time * cosSpd) * range;
         
@@ -90,16 +99,6 @@ public class Ghost : MonoBehaviour {
         //座標更新
         transform.position += velocity;
         
-        if (GetDirection().x > 0)
-        {
-            //右向き
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else if (GetDirection().x < 0)
-        {
-            //左向き
-            GetComponent<SpriteRenderer>().flipX = false;
-        }
     }
 
     void Alpha()
@@ -126,9 +125,28 @@ public class Ghost : MonoBehaviour {
         if(trg == true && alpha <= 0)
         {
             Hocken.Ghostswitch = false;
-            Destroy(this.gameObject);
+            FindObjectOfType<GhostDestroy>().desCnt = 1;
         }
 
+    }
+
+    void RendColor()
+    {
+        red = GetComponent<Renderer>().materials[0].color.r;
+        green = GetComponent<Renderer>().materials[0].color.g;
+        blue = GetComponent<Renderer>().materials[0].color.b;
+
+        red02 = GetComponent<Renderer>().materials[1].color.r;
+        green02 = GetComponent<Renderer>().materials[1].color.g;
+        blue02 = GetComponent<Renderer>().materials[1].color.b;
+
+        red03 = GetComponent<Renderer>().materials[2].color.r;
+        green03 = GetComponent<Renderer>().materials[2].color.g;
+        blue03 = GetComponent<Renderer>().materials[2].color.b;
+
+        red04 = GetComponent<Renderer>().materials[3].color.r;
+        green04 = GetComponent<Renderer>().materials[3].color.g;
+        blue04 = GetComponent<Renderer>().materials[3].color.b;
     }
 
     public Vector3 GetDirection()
