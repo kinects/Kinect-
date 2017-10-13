@@ -146,6 +146,8 @@ public class BodySourceView : MonoBehaviour
 
             GhostCreate();
 
+            Fire();
+
             GameEnd();
 
         }
@@ -365,6 +367,18 @@ public class BodySourceView : MonoBehaviour
             }
         }
 
+    }
+
+    void Fire()
+    {
+        if (bodyPos[(int)Kinect.JointType.ThumbRight].y > bodyPos[(int)Kinect.JointType.HandRight].y + 0.5f &&
+            bodyPos[(int)Kinect.JointType.HandRight].z < bodyPos[(int)Kinect.JointType.ElbowRight].z - 1.5f)
+        {
+            FindObjectOfType<Spone>().trgFire = true;
+        }else
+        {
+            FindObjectOfType<Spone>().trgFire = false;
+        }
     }
 
     void PumpkinMove()
