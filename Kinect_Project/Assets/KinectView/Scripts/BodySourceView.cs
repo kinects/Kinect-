@@ -9,6 +9,8 @@ public class BodySourceView : MonoBehaviour
     public Material BoneMaterial;
     public GameObject BodySourceManager;
 
+    public GameObject Pumpkin;
+
     public static Vector3[] bodyPos = new Vector3[25];
     private ulong active = 0;
     
@@ -17,6 +19,11 @@ public class BodySourceView : MonoBehaviour
 
     public float timeElapsed = 0;
     public int batcnt = 0;
+
+    private bool One = true;
+    private bool flg = false;
+    private bool pumpkinFlg = false;
+    private bool grabFlg = false;
 
     public float len = 0;
     public float len2 = 0;
@@ -328,7 +335,81 @@ public class BodySourceView : MonoBehaviour
         }
 
     }
+    void PumpkinCre()
+    {
+        if (flg)
+        {
+            if (pumpkinFlg == false &&
+               bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+               bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y &&
+               bodyPos[(int)Kinect.JointType.ElbowRight].y <= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+               bodyPos[(int)Kinect.JointType.ElbowLeft].y <= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
+            {
+                pumpkinFlg = true;
+                One = true;
+            }
+            //両手のｙ座標が腰より下で右手と左手が離れていたら
+            if (pumpkinFlg == true &&
+                bodyPos[(int)Kinect.JointType.HandRight].y <= bodyPos[(int)Kinect.JointType.SpineMid].y &&
+                bodyPos[(int)Kinect.JointType.HandLeft].y <= bodyPos[(int)Kinect.JointType.SpineMid].y &&
+                bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineMid].x &&
+                bodyPos[(int)Kinect.JointType.HandLeft].x <= bodyPos[(int)Kinect.JointType.SpineMid].x)
+            {
+                if (One)
+                {
+                    Instantiate(Pumpkin, new Vector3(bodyPos[(int)Kinect.JointType.SpineBase].x, 0, bodyPos[(int)Kinect.JointType.SpineBase].z - 10), Quaternion.identity);
+                    flg = false;
+                    pumpkinFlg = false;
+                    One = false;
+                }
+            }
+        }
 
+    }
+
+    void PumpkinMove()
+    {
+
+        GameObject pumpukin = GameObject.Find("pumpkin(Clone)");
+        Vector3 p = pumpukin.transform.localPosition;
+
+        len = ((bodyPos[(int)Kinect.JointType.HandTipRight].x - bodyPos[(int)Kinect.JointType.ThumbRight].x) * (bodyPos[(int)Kinect.JointType.HandTipRight].x - bodyPos[(int)Kinect.JointType.ThumbRight].x) +
+               (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.ThumbRight].y) * (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.ThumbRight].y) +
+               (bodyPos[(int)Kinect.JointType.HandTipRight].z - bodyPos[(int)Kinect.JointType.ThumbRight].z) * (bodyPos[(int)Kinect.JointType.HandTipRight].z - bodyPos[(int)Kinect.JointType.ThumbRight].z));
+
+        len2 = ((bodyPos[(int)Kinect.JointType.WristRight].x - p.x) * (bodyPos[(int)Kinect.JointType.WristRight].x - p.x) +
+                (bodyPos[(int)Kinect.JointType.WristRight].y - p.y) * (bodyPos[(int)Kinect.JointType.WristRight].y - p.y));
+
+        if (Mathf.Sqrt(len) <= 1.0f)
+        {
+            grabFlg = true;
+            Debug.Log("掴む");
+        }
+        else if (Mathf.Sqrt(len) >= 1.0f)
+        {
+            Debug.Log("離す");
+            grabFlg = false;
+        }
+        else
+        {
+
+        }
+
+
+
+        if (grabFlg == true && Mathf.Sqrt(len2) <= 1.5f)
+        {
+            p.x = bodyPos[(int)Kinect.JointType.WristRight].x;
+            p.y = bodyPos[(int)Kinect.JointType.WristRight].y;
+            p.z = bodyPos[(int)Kinect.JointType.WristRight].z - 5;
+
+        }
+
+
+        pumpukin.transform.localPosition = p;
+
+
+    }
 
     //ゲームを終了させる
     void GameEnd()
@@ -355,4 +436,5 @@ public class BodySourceView : MonoBehaviour
             SceneManager.LoadScene("Result");
         }
     }
+
 }
