@@ -109,6 +109,7 @@ public class BodySourceView : MonoBehaviour
             {
                 Destroy(_Bodies[trackingId]);
                 _Bodies.Remove(trackingId);
+                active = 0;
             }
         }
 
@@ -120,12 +121,7 @@ public class BodySourceView : MonoBehaviour
                 continue;
             }
             
-            if (active != body.TrackingId && active != 0)
-            {
-                continue;
-            }
-            
-            if(body.IsTracked)
+            if(body.IsTracked && (active == body.TrackingId || active == 0))
             {
                 if(!_Bodies.ContainsKey(body.TrackingId))
                 {
@@ -135,7 +131,7 @@ public class BodySourceView : MonoBehaviour
                 RefreshBodyObject(body, _Bodies[body.TrackingId]);
                 active = body.TrackingId;
             }
-
+            Debug.Log(active);
         }
         if (bodyTrg == true)
         {
@@ -334,6 +330,7 @@ public class BodySourceView : MonoBehaviour
         }
 
     }
+
     void PumpkinCre()
     {
         if (flg)
