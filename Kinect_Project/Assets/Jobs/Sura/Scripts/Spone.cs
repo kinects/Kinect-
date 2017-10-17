@@ -17,11 +17,12 @@ public class Spone : MonoBehaviour {
     public bool trgBatsR = false;
     public bool trgBatsL = false;
     public bool trgCandy = false;
+    public bool trgPumpkin = false;
     public bool trgFire = false;
     public bool trgShine = false;
 
     //コウモリの出ている数
-    public static int BatRcnt = 0;  
+    public static int BatRcnt = 0;
     public static int BatLcnt = 0;
 
     //炎が既にでているかどうかのスイッチ
@@ -101,21 +102,60 @@ public class Spone : MonoBehaviour {
                     if (BatLcnt < 1)
                     {
                         x = -15;
-                        y = Random.Range(5,7);
+                        y = Random.Range(5, 7);
                         z = 10f;
 
                         Instantiate(batsL, new Vector3(x, y, z), Quaternion.identity);
                         BatLcnt++;
                     }
                 }
-
-                trgBatsL = false;
             }
-            
+            if (trgPumpkin == true)
+            {
+
+                x = BodySourceView.bodyPos[(int)Kinect.JointType.SpineBase].x;
+                y = 5f;
+                z = 10f;
+
+                if (ONE)
+                {
+                    Instantiate(pumpkin, new Vector3(x, y, z), Quaternion.identity);
+                    ONE = false;
+                }
+
+                trgPumpkin = false;
+                ONE = true;
+
+            }
+
+            if (trgCandy == true)
+            {
+
+                if (ONE)
+                {
+                    for (int i = 0; i <= 30; i++)
+                    {
+                        x = Random.Range(-20, 20);
+                        y = Random.Range(15, 50);
+                        z = 10f;
+                        Instantiate(candy, new Vector3(x, y, z), Quaternion.identity);
+                    }
+                    ONE = false;
+                }
+
+                Debug.Log(count);
+                trgCandy = false;
+                ONE = true;
+
+            }
+
+            trgBatsL = false;
             time = sTime;
         }
-        //火
-        if(trgFire == true)
+            
+
+            //火
+            if (trgFire == true)
         {
             if (fireswitch == false)
             {
@@ -156,5 +196,8 @@ public class Spone : MonoBehaviour {
             trgShine = false;
             Destroy(GameObject.Find("Shine(Clone)"));
         }
+
     }
+
+    
 }
