@@ -3,23 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using Kinect = Windows.Kinect;
 
-public class pumpkinMove : MonoBehaviour {
+public class pumpkinMove : MonoBehaviour
+{
 
     private bool grabFlg = false;
     private Vector3 pumpkinPos;
     public float len = 0;
     public float len2 = 0;
+    private float desTime;
+
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Yokoari")
+        {
+            Destroy(gameObject);
+            Spone.pumpkinFlg = true;
+        }
+    }
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+        desTime = 30;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         PumpkinMove();
-	}
+        PumpkinDestroy();
+
+    }
 
     void PumpkinMove()
     {
@@ -58,6 +75,19 @@ public class pumpkinMove : MonoBehaviour {
 
         transform.position = pumpkinPos;
 
+
+    }
+
+    void PumpkinDestroy()
+    {
+
+        desTime -= Time.deltaTime;
+        Debug.Log(desTime);
+        if (desTime < 0)
+        {
+            Destroy(gameObject);
+            Spone.pumpkinFlg = true;
+        }
 
     }
 }
