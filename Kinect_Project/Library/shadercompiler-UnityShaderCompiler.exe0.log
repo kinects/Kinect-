@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Base path: C:/Users/nwuser.DA/Desktop/unity/Editor/Data
+=======
+Base path: C:/Program Files/Editor/Data
+>>>>>>> origin/Gozzilla
 Cmd: initializeCompiler
 Cmd: preprocess
   insize=2684 outsize=784 ok=1

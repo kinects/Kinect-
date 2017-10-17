@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Kinect = Windows.Kinect;
 
-public class Spone : MonoBehaviour {
+public class Spone : MonoBehaviour
+{
 
     public GameObject ghost;
     public GameObject batsR;
@@ -30,6 +31,8 @@ public class Spone : MonoBehaviour {
 
     //キラキラがすでに出ているかどうかのスイッチ
     public static bool shineswitch = false;
+
+    public static bool pumpkinFlg = true;
 
     private int count = 0;
     private bool ONE = true;
@@ -117,14 +120,13 @@ public class Spone : MonoBehaviour {
                 y = 5f;
                 z = 10f;
 
-                if (ONE)
+                if (pumpkinFlg)
                 {
                     Instantiate(pumpkin, new Vector3(x, y, z), Quaternion.identity);
-                    ONE = false;
+                    pumpkinFlg = false;
                 }
 
                 trgPumpkin = false;
-                ONE = true;
 
             }
 
@@ -152,22 +154,23 @@ public class Spone : MonoBehaviour {
             trgBatsL = false;
             time = sTime;
         }
-            
 
-            //火
-            if (trgFire == true)
+
+        //火
+        if (trgFire == true)
         {
             if (fireswitch == false)
             {
                 Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
                 fireswitch = true;
-            }else
+            }
+            else
             {
                 GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
                 firetime += Time.deltaTime;
             }
         }
-        if(firetime > 5)
+        if (firetime > 5)
         {
             fireswitch = false;
             firetime = 0;
@@ -199,5 +202,5 @@ public class Spone : MonoBehaviour {
 
     }
 
-    
+
 }

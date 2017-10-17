@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 87f81cbee813dfc478084fcec50d264b
 folderAsset: yes
 timeCreated: 1508219415
+=======
+guid: 4a9d69ba37e04a243beb28c8644e40d1
+folderAsset: yes
+timeCreated: 1508218663
+>>>>>>> origin/Gozzilla
 licenseType: Free
 DefaultImporter:
   userData: 
