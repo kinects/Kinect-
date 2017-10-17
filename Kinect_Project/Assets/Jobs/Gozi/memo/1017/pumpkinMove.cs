@@ -26,7 +26,7 @@ public class pumpkinMove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        desTime = 30;
+        desTime = 5;
     }
 
     // Update is called once per frame
