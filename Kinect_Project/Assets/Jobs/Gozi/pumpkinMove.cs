@@ -26,7 +26,7 @@ public class pumpkinMove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        desTime = 5;
+        desTime = 15;
     }
 
     // Update is called once per frame
@@ -34,7 +34,6 @@ public class pumpkinMove : MonoBehaviour
     {
 
         PumpkinMove();
-        PumpkinDestroy();
 
     }
 
@@ -70,6 +69,16 @@ public class pumpkinMove : MonoBehaviour
             pumpkinPos.x = BodySourceView.bodyPos[(int)Kinect.JointType.WristRight].x;
             pumpkinPos.y = BodySourceView.bodyPos[(int)Kinect.JointType.WristRight].y;
             pumpkinPos.z = 10f;
+        }
+        else
+        {
+            desTime -= Time.deltaTime;
+            Debug.Log(desTime);
+            if (desTime < 0)
+            {
+                Destroy(gameObject);
+                Spone.pumpkinFlg = true;
+            }
         }
 
 
