@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Yokoari : MonoBehaviour {
+public class Yokoari : MonoBehaviour
+{
 
     //最も近いオブジェクト
     private GameObject nearObj;
@@ -17,37 +18,86 @@ public class Yokoari : MonoBehaviour {
     float theta;
     float vx;
 
+
+    private Vector2 Position;
+    private SpriteRenderer spRenderer;
+    public static bool Hockenswitch = false;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         //最も近かったオブジェクトを取得
-        nearObj = serchTag(gameObject,"Ghost");
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-        time += Time.deltaTime;
-
-        if(time >= 1.0f)
-        {
-            //Ghostのタグを持ってるやつを取得
-            nearObj = serchTag(gameObject, "Ghost");
-            time = 0;
-        }
-
-        //目的のタグを持つやつがいるか判定
-        if(nearObj != null)
-        {
-            //GhostTracking();
-        }
-        else
-        {
-            
-        }
+        nearObj = serchTag(gameObject, "Ghost");
 
     }
+    // Update is called once per frame
+    void Update()
+    {
+
+        Vector3 ypos = GameObject.Find("Yokoari").transform.position;
+
+        if (Spone.BatLcnt > 0)
+        {
+            if (Vector2.Distance(GameObject.Find("BatL(Clone)").transform.position, transform.position) < 6.5f)
+            {
+                ypos.z = 10;
+                Hockenswitch = true;
+            }
+            else
+            {
+                if (Smoke.trgsSmoke == false)
+                {
+                    ypos.z = 10;
+                    Hockenswitch = false;
+                }
+            }
+        }
+        if (Spone.BatRcnt > 0)
+        {
+            if (Vector2.Distance(GameObject.Find("BatR(Clone)").transform.position, transform.position) < 6.5f)
+            {
+                ypos.z = 10;
+                Hockenswitch = true;
+            }
+            else
+            {
+                if (Smoke.trgsSmoke == false)
+                {
+                    ypos.z = 10;
+                    Hockenswitch = false;
+                }
+            }
+
+
+
+
+
+            time += Time.deltaTime;
+
+            if (time >= 1.0f)
+            {
+                //Ghostのタグを持ってるやつを取得
+                nearObj = serchTag(gameObject, "Ghost");
+                time = 0;
+            }
+
+            //目的のタグを持つやつがいるか判定
+            if (nearObj != null)
+            {
+                GhostTracking();
+            }
+            else
+            {
+
+            }
+            GameObject.Find("Yokoari").transform.position = ypos;
+            Position = transform.position;
+
+        }
+    }
+
+
 
     //指定されたタグの中で最も近いやつを取得
     GameObject serchTag(GameObject nowObj, string tagName)
@@ -63,7 +113,7 @@ public class Yokoari : MonoBehaviour {
         GameObject targetObj = null;
 
         //タグ指定されたオブジェクトを配列で取得
-        foreach(GameObject obs in GameObject.FindGameObjectsWithTag(tagName))
+        foreach (GameObject obs in GameObject.FindGameObjectsWithTag(tagName))
         {
             //自信と指定されたオブジェクトの距離を取得
             tmpDis = Vector3.Distance(obs.transform.position, nowObj.transform.position);
@@ -79,7 +129,7 @@ public class Yokoari : MonoBehaviour {
         }
         //一番近かったオブジェクトを返す
         return GameObject.Find(nearObjName);
-        //return targetObj;
+        return targetObj;
 
     }
 
@@ -96,5 +146,8 @@ public class Yokoari : MonoBehaviour {
 
         transform.position = nowPos;
     }
+
+
+
 
 }

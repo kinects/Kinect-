@@ -1,0 +1,117 @@
+   //かぼちゃ生成
+    void PumpkinCre()
+    {
+        if (flg)
+        {
+            //二秒間手を上げ続けたらかぼちゃ生成
+            if (/*bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+               bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y &&*/
+               bodyPos[(int)Kinect.JointType.ElbowRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+               bodyPos[(int)Kinect.JointType.ElbowLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
+            {
+                timeElapsed += Time.deltaTime;
+            }
+            else
+            {
+                timeElapsed = 0;
+            }
+
+            if(timeElapsed > 2)
+            {
+                if (One)
+                {
+                    pumpkinFlg = true;
+                    Instantiate(Pumpkin, new Vector3(bodyPos[(int)Kinect.JointType.SpineBase].x, 0, bodyPos[(int)Kinect.JointType.SpineBase].z - 10), Quaternion.Euler(-90, 0, -180));
+                    One = false;
+                    
+                }
+                timeElapsed = 0;
+            }
+
+
+        }
+    }
+    //かぼちゃの移動
+    void PumpkinMove()
+    {
+
+        GameObject pumpukin = GameObject.Find("pumpkin(Clone)");
+        Vector3 p = pumpukin.transform.localPosition;
+        //手と手が一定の距離ならグラブフラグをオンにする
+        len = ((bodyPos[(int)Kinect.JointType.HandRight].x - bodyPos[(int)Kinect.JointType.HandLeft].x) * (bodyPos[(int)Kinect.JointType.HandRight].x - bodyPos[(int)Kinect.JointType.HandLeft].x) +
+               (bodyPos[(int)Kinect.JointType.HandRight].y - bodyPos[(int)Kinect.JointType.HandLeft].y) * (bodyPos[(int)Kinect.JointType.HandRight].y - bodyPos[(int)Kinect.JointType.HandLeft].y));
+
+        len2 = (((bodyPos[(int)Kinect.JointType.WristRight].x - p.x) * (bodyPos[(int)Kinect.JointType.WristRight].x - p.x)) +
+                ((bodyPos[(int)Kinect.JointType.WristRight].y - p.y) * (bodyPos[(int)Kinect.JointType.WristRight].y - p.y)));
+
+        if (Mathf.Sqrt(len) <= 0.5f)
+        {
+            grabFlg = true;
+            Debug.Log("掴む");
+        }
+        else if (Mathf.Sqrt(len) >= 1.0f)
+        {
+            Debug.Log("離す");
+            grabFlg = false;
+        }
+
+
+
+        if (grabFlg == true && Mathf.Sqrt(len2) <= 1.5f)
+        {
+            Debug.Log("hey");
+            p.x = bodyPos[(int)Kinect.JointType.WristRight].x;
+            p.y = bodyPos[(int)Kinect.JointType.WristRight].y;
+           // p.z = bodyPos[(int)Kinect.JointType.WristRight].z - 5;
+
+        }
+
+
+        pumpukin.transform.localPosition = p;
+
+
+    }
+
+    void CandyCre()
+    {
+
+        if (flg)
+        {
+            if (candyFlg == false &&
+               bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+               bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y&&
+               bodyPos[(int)Kinect.JointType.ElbowRight].y <= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+               bodyPos[(int)Kinect.JointType.ElbowLeft].y  <= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
+            {
+                Debug.Log("飴");
+                candyFlg = true;
+                One = true;
+            }
+            else
+            {
+                candyFlg = false;
+            }
+            //両手のｙ座標が腰より下で右手と左手が離れていたら
+            if (candyFlg == true &&
+                bodyPos[(int)Kinect.JointType.HandRight].y <= bodyPos[(int)Kinect.JointType.SpineBase].y &&
+                bodyPos[(int)Kinect.JointType.HandLeft].y <= bodyPos[(int)Kinect.JointType.SpineBase].y &&
+                bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineBase].x &&
+                bodyPos[(int)Kinect.JointType.HandLeft].x <= bodyPos[(int)Kinect.JointType.SpineBase].x)
+            {
+                if (One)
+                {
+                    for (int i = 0; i <= 40; i++)
+                    {
+                        x = Random.Range(-20, 20);
+                        y = Random.Range(15, 50);
+                        z = 10f;
+                        Instantiate(Candy, new Vector3(x, y, z), Quaternion.identity);
+                    }
+                    flg = false;
+                    candyFlg = false;
+                    One = false;
+                }
+            }
+        }
+
+    }

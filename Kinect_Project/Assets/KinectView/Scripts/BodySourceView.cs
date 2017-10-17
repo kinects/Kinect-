@@ -10,6 +10,7 @@ public class BodySourceView : MonoBehaviour
     public GameObject BodySourceManager;
 
     public GameObject Pumpkin;
+    public GameObject Candy;
 
     public static Vector3[] bodyPos = new Vector3[25];
     private ulong active = 0;
@@ -17,9 +18,13 @@ public class BodySourceView : MonoBehaviour
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
 
+    private float x = 0;
+    private float y = 0;
+    private float z = 0;
+
     public float timeElapsed = 0;
     public int batcnt = 0;
-
+/*
     private bool One = true;
     private bool flg = false;
     private bool pumpkinFlg = false;
@@ -29,6 +34,12 @@ public class BodySourceView : MonoBehaviour
     public float len2 = 0;
 
     private int candyCnt = 0;
+
+    private bool candyFlg= false;
+    */
+
+
+
 
 
     public float a;
@@ -126,6 +137,7 @@ public class BodySourceView : MonoBehaviour
                 if(!_Bodies.ContainsKey(body.TrackingId))
                 {
                     _Bodies[body.TrackingId] = CreateBodyObject(body.TrackingId);
+                    //flg = true;
                 }
                 
                 RefreshBodyObject(body, _Bodies[body.TrackingId]);
@@ -133,8 +145,25 @@ public class BodySourceView : MonoBehaviour
             }
             Debug.Log(active);
         }
+
+
+        /*
+        CandyCre();
+
+        PumpkinCre();
+
+        if (pumpkinFlg == true)
+        {
+            PumpkinMove();
+        }
+        */
+
+
         if (bodyTrg == true)
         {
+
+
+           
 
             BatsCreateR();
 
@@ -142,11 +171,16 @@ public class BodySourceView : MonoBehaviour
 
             GhostCreate();
 
-            Fire();
+            FireCreate();
+
+            ShineCreate();
 
             GameEnd();
-
+        
         }
+
+
+
     }
     
     //体を認識してボーンを生成する
@@ -312,58 +346,7 @@ public class BodySourceView : MonoBehaviour
         }
     }
 
-    void CandyCreate()
-    {
-        len = ((bodyPos[(int)Kinect.JointType.WristRight].x - bodyPos[(int)Kinect.JointType.WristLeft].x) * (bodyPos[(int)Kinect.JointType.WristRight].x - bodyPos[(int)Kinect.JointType.WristLeft].x) +
-               (bodyPos[(int)Kinect.JointType.WristRight].y - bodyPos[(int)Kinect.JointType.WristLeft].y) - (bodyPos[(int)Kinect.JointType.WristRight].y - bodyPos[(int)Kinect.JointType.WristLeft].y));
-
-        len2 = ((bodyPos[(int)Kinect.JointType.HandTipRight].x - bodyPos[(int)Kinect.JointType.HandTipLeft].x) * (bodyPos[(int)Kinect.JointType.HandRight].x - bodyPos[(int)Kinect.JointType.HandTipLeft].x) +
-               (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.HandTipLeft].y) - (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.HandTipLeft].y));
-        if (Mathf.Sqrt(len) <= 0.5f && Mathf.Sqrt(len2) <= 1.0f && bodyPos[(int)Kinect.JointType.HandTipLeft].z <= bodyPos[(int)Kinect.JointType.WristLeft].z)
-        {
-            Debug.Log("皿");
-            FindObjectOfType<Spone>().trgCandy = true;
-        }
-        else
-        {
-            FindObjectOfType<Spone>().trgCandy = false;
-        }
-
-    }
-
-    void PumpkinCre()
-    {
-        if (flg)
-        {
-            if (pumpkinFlg == false &&
-               bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
-               bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y &&
-               bodyPos[(int)Kinect.JointType.ElbowRight].y <= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
-               bodyPos[(int)Kinect.JointType.ElbowLeft].y <= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
-            {
-                pumpkinFlg = true;
-                One = true;
-            }
-            //両手のｙ座標が腰より下で右手と左手が離れていたら
-            if (pumpkinFlg == true &&
-                bodyPos[(int)Kinect.JointType.HandRight].y <= bodyPos[(int)Kinect.JointType.SpineMid].y &&
-                bodyPos[(int)Kinect.JointType.HandLeft].y <= bodyPos[(int)Kinect.JointType.SpineMid].y &&
-                bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineMid].x &&
-                bodyPos[(int)Kinect.JointType.HandLeft].x <= bodyPos[(int)Kinect.JointType.SpineMid].x)
-            {
-                if (One)
-                {
-                    Instantiate(Pumpkin, new Vector3(bodyPos[(int)Kinect.JointType.SpineBase].x, 0, bodyPos[(int)Kinect.JointType.SpineBase].z - 10), Quaternion.identity);
-                    flg = false;
-                    pumpkinFlg = false;
-                    One = false;
-                }
-            }
-        }
-
-    }
-
-    void Fire()
+    void FireCreate()
     {
         if (bodyPos[(int)Kinect.JointType.ThumbRight].y > bodyPos[(int)Kinect.JointType.HandRight].y + 0.5f &&
             bodyPos[(int)Kinect.JointType.HandRight].z < bodyPos[(int)Kinect.JointType.ElbowRight].z - 1.5f &&
@@ -372,21 +355,55 @@ public class BodySourceView : MonoBehaviour
             FindObjectOfType<Spone>().trgFire = true;
         }
     }
+    /*
+    //かぼちゃ生成
+    void PumpkinCre()
+    {
+        if (flg)
+        {
+            
+            //二秒間手を上げ続けたらかぼちゃ生成
+            if(
+               bodyPos[(int)Kinect.JointType.ElbowRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+               bodyPos[(int)Kinect.JointType.ElbowLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
+            {
+                timeElapsed += Time.deltaTime;
+            }
+            else
+            {
+                timeElapsed = 0;
+            }
 
+            if (timeElapsed > 2)
+            {
+                if (One)
+                {
+                    Debug.Log("aaa");
+                    pumpkinFlg = true;
+                    Instantiate(Pumpkin, new Vector3(bodyPos[(int)Kinect.JointType.SpineBase].x, 0, bodyPos[(int)Kinect.JointType.SpineBase].z - 10), Quaternion.Euler(-90, 0, -180));
+                    One = false;
+
+                }
+                timeElapsed = 0;
+            }
+
+
+        }
+    }
+    //かぼちゃの移動
     void PumpkinMove()
     {
 
         GameObject pumpukin = GameObject.Find("pumpkin(Clone)");
         Vector3 p = pumpukin.transform.localPosition;
+        //手と手が一定の距離ならグラブフラグをオンにする
+        len = ((bodyPos[(int)Kinect.JointType.HandRight].x - bodyPos[(int)Kinect.JointType.HandLeft].x) * (bodyPos[(int)Kinect.JointType.HandRight].x - bodyPos[(int)Kinect.JointType.HandLeft].x) +
+               (bodyPos[(int)Kinect.JointType.HandRight].y - bodyPos[(int)Kinect.JointType.HandLeft].y) * (bodyPos[(int)Kinect.JointType.HandRight].y - bodyPos[(int)Kinect.JointType.HandLeft].y));
 
-        len = ((bodyPos[(int)Kinect.JointType.HandTipRight].x - bodyPos[(int)Kinect.JointType.ThumbRight].x) * (bodyPos[(int)Kinect.JointType.HandTipRight].x - bodyPos[(int)Kinect.JointType.ThumbRight].x) +
-               (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.ThumbRight].y) * (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.ThumbRight].y) +
-               (bodyPos[(int)Kinect.JointType.HandTipRight].z - bodyPos[(int)Kinect.JointType.ThumbRight].z) * (bodyPos[(int)Kinect.JointType.HandTipRight].z - bodyPos[(int)Kinect.JointType.ThumbRight].z));
+        len2 = (((bodyPos[(int)Kinect.JointType.WristRight].x - p.x) * (bodyPos[(int)Kinect.JointType.WristRight].x - p.x)) +
+                ((bodyPos[(int)Kinect.JointType.WristRight].y - p.y) * (bodyPos[(int)Kinect.JointType.WristRight].y - p.y)));
 
-        len2 = ((bodyPos[(int)Kinect.JointType.WristRight].x - p.x) * (bodyPos[(int)Kinect.JointType.WristRight].x - p.x) +
-                (bodyPos[(int)Kinect.JointType.WristRight].y - p.y) * (bodyPos[(int)Kinect.JointType.WristRight].y - p.y));
-
-        if (Mathf.Sqrt(len) <= 1.0f)
+        if (Mathf.Sqrt(len) <= 0.5f)
         {
             grabFlg = true;
             Debug.Log("掴む");
@@ -396,18 +413,15 @@ public class BodySourceView : MonoBehaviour
             Debug.Log("離す");
             grabFlg = false;
         }
-        else
-        {
-
-        }
 
 
 
         if (grabFlg == true && Mathf.Sqrt(len2) <= 1.5f)
         {
+            Debug.Log("hey");
             p.x = bodyPos[(int)Kinect.JointType.WristRight].x;
             p.y = bodyPos[(int)Kinect.JointType.WristRight].y;
-            p.z = bodyPos[(int)Kinect.JointType.WristRight].z - 5;
+            // p.z = bodyPos[(int)Kinect.JointType.WristRight].z - 5;
 
         }
 
@@ -417,8 +431,51 @@ public class BodySourceView : MonoBehaviour
 
     }
 
-    //ゲームを終了させる
-    void GameEnd()
+    void CandyCre()
+    {
+
+        if (flg)
+        {
+            if (candyFlg == false &&
+               bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+               bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y &&
+               bodyPos[(int)Kinect.JointType.ElbowRight].y <= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+               bodyPos[(int)Kinect.JointType.ElbowLeft].y <= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
+            {
+                Debug.Log("飴");
+                candyFlg = true;
+                One = true;
+            }
+            else
+            {
+                candyFlg = false;
+            }
+            //両手のｙ座標が腰より下で右手と左手が離れていたら
+            if (candyFlg == true &&
+                bodyPos[(int)Kinect.JointType.HandRight].y <= bodyPos[(int)Kinect.JointType.SpineBase].y &&
+                bodyPos[(int)Kinect.JointType.HandLeft].y <= bodyPos[(int)Kinect.JointType.SpineBase].y &&
+                bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineBase].x &&
+                bodyPos[(int)Kinect.JointType.HandLeft].x <= bodyPos[(int)Kinect.JointType.SpineBase].x)
+            {
+                if (One)
+                {
+                    for (int i = 0; i <= 40; i++)
+                    {
+                        x = Random.Range(-20, 20);
+                        y = Random.Range(15, 50);
+                        z = 10f;
+                        Instantiate(Candy, new Vector3(x, y, z), Quaternion.identity);
+                    }
+                    flg = false;
+                    candyFlg = false;
+                    One = false;
+                }
+            }
+        }
+    }
+    */
+           //ゲームを終了させる
+            void GameEnd()
     {
         //横に手を広げている時
         if (bodyPos[(int)Kinect.JointType.ShoulderLeft].x > bodyPos[(int)Kinect.JointType.HandLeft].x + 2 &&
@@ -444,3 +501,4 @@ public class BodySourceView : MonoBehaviour
     }
 
 }
+

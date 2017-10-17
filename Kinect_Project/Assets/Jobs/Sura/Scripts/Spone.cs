@@ -114,7 +114,7 @@ public class Spone : MonoBehaviour {
             
             time = sTime;
         }
-
+        //火
         if(trgFire == true)
         {
             if (fireswitch == false)
@@ -134,16 +134,18 @@ public class Spone : MonoBehaviour {
             trgFire = false;
             Destroy(GameObject.Find("Fire(Clone)"));
         }
+        //キラキラ
         if (trgShine == true)
         {
             if (shineswitch == false)
             {
-                Instantiate(shine, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
+
+                Instantiate(shine, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft], Quaternion.identity);
                 shineswitch = true;
             }
             else
             {
-                GameObject.Find("Shine(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
+                GameObject.Find("Shine(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft];
                 shinetime += Time.deltaTime;
             }
         }

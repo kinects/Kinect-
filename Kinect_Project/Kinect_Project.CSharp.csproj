@@ -124,6 +124,7 @@
     <Compile Include="Assets\Jobs\Gozi\Dinner table\Standard Assets\Effects\ImageEffects\Scripts\Vortex.cs" />
     <Compile Include="Assets\Jobs\Sura\Scripts\Ghost.cs" />
     <Compile Include="Assets\Jobs\Sura\Scripts\GhostDestroy.cs" />
+    <Compile Include="Assets\Jobs\Sura\Scripts\Spone.cs" />
     <Compile Include="Assets\Jobs\Sura\Scripts\Yokoari.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\BatsL.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\BatsR.cs" />
@@ -140,7 +141,6 @@
     <Compile Include="Assets\KinectView\Scripts\InfraredSourceView.cs" />
     <Compile Include="Assets\KinectView\Scripts\MultiSourceManager.cs" />
     <Compile Include="Assets\KinectView\Scripts\ResultMove.cs" />
-    <Compile Include="Assets\Scripts\Spone.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AddTag.txt" />
@@ -213,9 +213,10 @@
     <None Include="Assets\Jobs\Gozi\memo\BodySourceView_Candy.txt" />
     <None Include="Assets\Jobs\Gozi\memo\BodySourceView_pumpkin.txt" />
     <None Include="Assets\Jobs\Gozi\memo\Spone_Candy.txt" />
+    <None Include="Assets\Jobs\Gozi\memo\pumpkin.txt" />
     <None Include="Assets\Jobs\Misawa\memo\flameソース.txt" />
-    <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
-    <None Include="Assets\Particle Ribbon by Moonflower Carnivore\readme_Simple_Particle_Ribbon.txt" />
+    <None Include="Assets\Jobs\Sura\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
+    <None Include="Assets\Jobs\Sura\Particle Ribbon by Moonflower Carnivore\readme_Simple_Particle_Ribbon.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
