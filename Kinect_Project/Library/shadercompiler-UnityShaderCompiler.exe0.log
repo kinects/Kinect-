@@ -1,2 +1,4 @@
-Base path: C:/Users/nwuser.DA/Desktop/学校/Unity/Editor/Data
+Base path: C:/Users/nwuser.DA/Desktop/unity/Editor/Data
 Cmd: initializeCompiler
+Cmd: preprocess
+  insize=2684 outsize=784 ok=1
