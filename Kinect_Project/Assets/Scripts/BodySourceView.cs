@@ -178,7 +178,7 @@ public class BodySourceView : MonoBehaviour
             lr.material = BoneMaterial;
             lr.SetWidth(0.5f, 0.5f);
             
-            jointObj.transform.localScale = new Vector3(0f, 0f, 0f);
+            jointObj.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             jointObj.name = jt.ToString();
             jointObj.transform.parent = body.transform;
 
@@ -227,9 +227,10 @@ public class BodySourceView : MonoBehaviour
                 lr.SetPosition(1, (GetVector3FromJoint(targetJoint.Value) + new Vector3((0.25f), 0, 0)) + new Vector3((GetVector3FromJoint(targetJoint.Value).x + 0.25f) * a, 0, 0));
                 lr.SetColors(GetColorForState (sourceJoint.TrackingState), GetColorForState(targetJoint.Value.TrackingState));
             }
-            
-            lr.enabled = false;
-           
+            else
+            {
+                lr.enabled = false;
+            }
         }
         
     }
@@ -308,7 +309,6 @@ public class BodySourceView : MonoBehaviour
             bodyPos[(int)Kinect.JointType.HandTipLeft].y <= bodyPos[(int)Kinect.JointType.HandLeft].y + 1)
         {
             FindObjectOfType<Spone>().trgGhost = true;
-
             //Debug.Log("いいぞ。3");
         }
         else
@@ -348,7 +348,28 @@ public class BodySourceView : MonoBehaviour
         {
             FindObjectOfType<Spone>().trgPumpkin = false;
         }
+        /*
+            //2秒間腕を上に上げ続けたら処理
+            if (bodyPos[(int)Kinect.JointType.ElbowRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
+                bodyPos[(int)Kinect.JointType.ElbowLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
+            {
+                timeElapsed += Time.deltaTime;
+            }
+            else
+            {
+                timeElapsed = 0;
+            }
 
+            if( timeElapsed > 2)
+            {
+                FindObjectOfType<Spone>().trgPumpkin = true;
+                timeElapsed = 0;
+            }
+            else
+            {
+                FindObjectOfType<Spone>().trgPumpkin = false;
+            }
+            */
     }
 
     //飴生成

@@ -24,6 +24,8 @@ public class Ghost : MonoBehaviour {
     float red, green, blue;
     float red02, green02, blue02;
     float red03, green03, blue03;
+    float red04, green04, blue04;
+    float red05, green05, blue05;
 
     //移動ベクトル
     Vector3 velocity;
@@ -33,8 +35,6 @@ public class Ghost : MonoBehaviour {
 
     //消え始めるまでの時間
     public float time = 5;
-
-
 
     void Start()
     {
@@ -66,10 +66,9 @@ public class Ghost : MonoBehaviour {
         GetComponent<Renderer>().materials[0].color = new Color(red, green, blue, alpha);
         GetComponent<Renderer>().materials[1].color = new Color(red02, green02, blue02, alpha);
         GetComponent<Renderer>().materials[2].color = new Color(red03, green03, blue03, alpha);
-        GetComponent<Renderer>().materials[3].color = new Color(red03, green03, blue03, alpha);
-        GetComponent<Renderer>().materials[4].color = new Color(red02, green02, blue02, alpha);
+        GetComponent<Renderer>().materials[3].color = new Color(red04, green04, blue04, alpha);
+        GetComponent<Renderer>().materials[4].color = new Color(red05, green05, blue05, alpha);
 
-        //ふわふわする移動のやつ
         velocity.y = Mathf.Cos(Time.time * cosSpd) * range;
         
         //座標更新
@@ -126,12 +125,6 @@ public class Ghost : MonoBehaviour {
         if(trg == true && alpha <= 0)
         {
             Hocken.Ghostswitch = false;
-
-            //ヨコアリくんのおびえるアニメーションを戻す
-            FindObjectOfType<Yokoari>().squatState = false;
-            FindObjectOfType<Yokoari>().idleState = true;
-
-            //オバケの存在フラグをオフ
             FindObjectOfType<GhostDestroy>().desCnt = 1;
         }
 
@@ -151,6 +144,9 @@ public class Ghost : MonoBehaviour {
         green03 = GetComponent<Renderer>().materials[2].color.g;
         blue03 = GetComponent<Renderer>().materials[2].color.b;
 
+        red04 = GetComponent<Renderer>().materials[3].color.r;
+        green04 = GetComponent<Renderer>().materials[3].color.g;
+        blue04 = GetComponent<Renderer>().materials[3].color.b;
     }
 
     public Vector3 GetDirection()
