@@ -84,17 +84,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Jobs\Gozi\memo\1017\pumpkinMove.cs" />
+    <Compile Include="Assets\Jobs\Gozi\pumpkinMove.cs" />
     <Compile Include="Assets\Jobs\Sura\Scripts\Ghost.cs" />
     <Compile Include="Assets\Jobs\Sura\Scripts\GhostDestroy.cs" />
-    <Compile Include="Assets\Jobs\Sura\Scripts\Spone.cs" />
-    <Compile Include="Assets\Jobs\Sura\Scripts\Yokoari.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\BatsL.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\BatsR.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\Hocken.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\Smoke.cs" />
     <Compile Include="Assets\KinectView\Scripts\BodySourceManager.cs" />
-    <Compile Include="Assets\KinectView\Scripts\BodySourceView.cs" />
     <Compile Include="Assets\KinectView\Scripts\ColorSourceManager.cs" />
     <Compile Include="Assets\KinectView\Scripts\ColorSourceView.cs" />
     <Compile Include="Assets\KinectView\Scripts\DepthSourceManager.cs" />
@@ -104,15 +101,18 @@
     <Compile Include="Assets\KinectView\Scripts\InfraredSourceView.cs" />
     <Compile Include="Assets\KinectView\Scripts\MultiSourceManager.cs" />
     <Compile Include="Assets\KinectView\Scripts\ResultMove.cs" />
+    <Compile Include="Assets\Scripts\BodySourceView.cs" />
+    <Compile Include="Assets\Scripts\Spone.cs" />
+    <Compile Include="Assets\Scripts\Yokoari.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AddTag.txt" />
+    <None Include="Assets\Jobs\Gozi\memo\1013\BodySourceView_Candy.txt" />
+    <None Include="Assets\Jobs\Gozi\memo\1013\BodySourceView_pumpkin.txt" />
+    <None Include="Assets\Jobs\Gozi\memo\1013\Spone_Candy.txt" />
+    <None Include="Assets\Jobs\Gozi\memo\1013\pumpkin.txt" />
     <None Include="Assets\Jobs\Gozi\memo\1017\BodySourceViewPumpkin.txt" />
     <None Include="Assets\Jobs\Gozi\memo\1017\sponePumupkin.txt" />
-    <None Include="Assets\Jobs\Gozi\memo\BodySourceView_Candy.txt" />
-    <None Include="Assets\Jobs\Gozi\memo\BodySourceView_pumpkin.txt" />
-    <None Include="Assets\Jobs\Gozi\memo\Spone_Candy.txt" />
-    <None Include="Assets\Jobs\Gozi\memo\pumpkin.txt" />
     <None Include="Assets\Jobs\Misawa\memo\flameソース.txt" />
     <None Include="Assets\Jobs\Sura\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
     <None Include="Assets\Jobs\Sura\Particle Ribbon by Moonflower Carnivore\readme_Simple_Particle_Ribbon.txt" />

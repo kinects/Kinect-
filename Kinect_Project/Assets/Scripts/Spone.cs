@@ -6,6 +6,7 @@ using Kinect = Windows.Kinect;
 public class Spone : MonoBehaviour
 {
 
+    //オブジェクト
     public GameObject ghost;
     public GameObject batsR;
     public GameObject batsL;
@@ -14,6 +15,7 @@ public class Spone : MonoBehaviour
     public GameObject fire;
     public GameObject shine;
 
+    //フラグ
     public bool trgGhost = false;
     public bool trgBatsR = false;
     public bool trgBatsL = false;
@@ -21,6 +23,7 @@ public class Spone : MonoBehaviour
     public bool trgPumpkin = false;
     public bool trgFire = false;
     public bool trgShine = false;
+
 
     //コウモリの出ている数
     public static int BatRcnt = 0;
@@ -32,6 +35,7 @@ public class Spone : MonoBehaviour
     //キラキラがすでに出ているかどうかのスイッチ
     public static bool shineswitch = false;
 
+    //かぼちゃ出現フラグ
     public static bool pumpkinFlg = true;
 
     private int count = 0;
@@ -60,17 +64,19 @@ public class Spone : MonoBehaviour
         if (time <= 0.0)
         {
 
+            //おばけ
             if (trgGhost == true)
             {
 
+                //おばけを三体生成
                 for (int i = 0; i <= 2; i++)
                 {
-
+                    //ランダム処理
                     x = Random.Range(-120f, 120f);
                     y = Random.Range(-100f, 100f);
                     z = 149f;
 
-                    Hocken.Ghostswitch = true;
+                    //Hocken.Ghostswitch = true;
 
                     Instantiate(ghost, new Vector3(x, y, z), Quaternion.identity);
                 }
@@ -78,15 +84,17 @@ public class Spone : MonoBehaviour
                 trgGhost = false;
             }
 
+            //コウモリ始め
             if (trgBatsR == true)
             {
 
+                //生成
                 for (int i = 0; i <= 0; i++)
                 {
                     if (BatRcnt < 1)
                     {
                         x = 15;
-                        y = Random.Range(5, 7);
+                        y = Random.Range(0, 4);
                         z = 10f;
 
                         Instantiate(batsR, new Vector3(x, y, z), Quaternion.identity);
@@ -97,6 +105,8 @@ public class Spone : MonoBehaviour
                 trgBatsR = false;
             }
 
+
+            
             if (trgBatsL == true)
             {
 
@@ -105,14 +115,21 @@ public class Spone : MonoBehaviour
                     if (BatLcnt < 1)
                     {
                         x = -15;
-                        y = Random.Range(5, 7);
+                        y = Random.Range(0, 4);
                         z = 10f;
 
                         Instantiate(batsL, new Vector3(x, y, z), Quaternion.identity);
                         BatLcnt++;
                     }
+                    trgBatsL = false;
                 }
             }
+            //コウモリ終了
+
+
+
+
+            //かぼちゃ
             if (trgPumpkin == true)
             {
 
@@ -120,6 +137,8 @@ public class Spone : MonoBehaviour
                 y = 5f;
                 z = 10f;
 
+
+                //かぼちゃをつかむ
                 if (pumpkinFlg)
                 {
                     Instantiate(pumpkin, new Vector3(x, y, z), Quaternion.identity);
@@ -129,7 +148,7 @@ public class Spone : MonoBehaviour
                 trgPumpkin = false;
 
             }
-
+            //飴
             if (trgCandy == true)
             {
 
@@ -151,7 +170,7 @@ public class Spone : MonoBehaviour
 
             }
 
-            trgBatsL = false;
+            //タイム管理
             time = sTime;
         }
 
@@ -177,6 +196,7 @@ public class Spone : MonoBehaviour
             trgFire = false;
             Destroy(GameObject.Find("Fire(Clone)"));
         }
+
         //キラキラ
         if (trgShine == true)
         {
