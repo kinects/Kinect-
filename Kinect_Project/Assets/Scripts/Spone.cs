@@ -134,14 +134,14 @@ public class Spone : MonoBehaviour
             {
 
                 x = BodySourceView.bodyPos[(int)Kinect.JointType.SpineBase].x;
-                y = 5f;
+                y = 3f;
                 z = 10f;
 
 
                 //かぼちゃをつかむ
                 if (pumpkinFlg)
                 {
-                    Instantiate(pumpkin, new Vector3(x, y, z), Quaternion.identity);
+                    Instantiate(pumpkin, new Vector3(x, y, z), Quaternion.Euler(-90, 0, -180));
                     pumpkinFlg = false;
                 }
 
