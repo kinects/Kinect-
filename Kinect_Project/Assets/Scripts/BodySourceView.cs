@@ -392,7 +392,7 @@ public class BodySourceView : MonoBehaviour
         if (timeElapsed > 3)                                               //約3秒経過したらメインシーンへ 
         {
             timeElapsed = 0;
-            SceneManager.LoadScene("Result");
+            SceneManager.LoadScene("ResultScene");
         }
     }
 
