@@ -24,7 +24,6 @@ public class Spone : MonoBehaviour
     public bool trgFire = false;
     public bool trgShine = false;
 
-
     //コウモリの出ている数
     public static int BatRcnt = 0;
     public static int BatLcnt = 0;
@@ -76,7 +75,9 @@ public class Spone : MonoBehaviour
                     y = Random.Range(-100f, 100f);
                     z = 149f;
 
-                    //Hocken.Ghostswitch = true;
+                    //ヨコアリくんのおびえるアニメーションを開始する
+                    FindObjectOfType<Yokoari>().idleState = false;
+                    FindObjectOfType<Yokoari>().squatState = true;
 
                     Instantiate(ghost, new Vector3(x, y, z), Quaternion.identity);
                 }
@@ -181,6 +182,11 @@ public class Spone : MonoBehaviour
             if (fireswitch == false)
             {
                 Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
+
+                //ヨコアリくんのびっくりするアニメーションを開始する
+                FindObjectOfType<Yokoari>().idleState = false;
+                FindObjectOfType<Yokoari>().supriseState = true;
+
                 fireswitch = true;
             }
             else
@@ -194,6 +200,11 @@ public class Spone : MonoBehaviour
             fireswitch = false;
             firetime = 0;
             trgFire = false;
+
+            //ヨコアリくんのびっくりするアニメーションを戻す
+            FindObjectOfType<Yokoari>().supriseState = false;
+            FindObjectOfType<Yokoari>().idleState = true;
+
             Destroy(GameObject.Find("Fire(Clone)"));
         }
 

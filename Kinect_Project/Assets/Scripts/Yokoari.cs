@@ -18,6 +18,13 @@ public class Yokoari : MonoBehaviour
     float theta;
     float vx;
 
+    //アニメーションのやつ
+    Animator animator;
+
+    //ヨコアリくんの状態
+    public bool idleState = true;
+    public bool squatState = false;
+    public bool supriseState = false;
 
     private Vector2 Position;
     private SpriteRenderer spRenderer;
@@ -27,77 +34,48 @@ public class Yokoari : MonoBehaviour
     void Start()
     {
 
+        //変数にアニメーターを入れる
+        animator = GetComponent(typeof(Animator)) as Animator;
+
+        //マテリアルを取得
+        Material mat = GetComponent<Renderer>().material;
+
         //最も近かったオブジェクトを取得
         nearObj = serchTag(gameObject, "Ghost");
 
     }
+
     // Update is called once per frame
     void Update()
     {
 
-        Vector3 ypos = GameObject.Find("Yokoari").transform.position;
+        //アニメーションを再生する
+        Animation();
+ 
 
-        if (Spone.BatLcnt > 0)
+        time += Time.deltaTime;
+
+        if (time >= 1.0f)
         {
-            if (Vector2.Distance(GameObject.Find("BatL(Clone)").transform.position, transform.position) < 6.5f)
-            {
-                ypos.z = 10;
-                Hockenswitch = true;
-            }
-            else
-            {
-                if (Smoke.trgsSmoke == false)
-                {
-                    ypos.z = 10;
-                    Hockenswitch = false;
-                }
-            }
+            //Ghostのタグを持ってるやつを取得
+            nearObj = serchTag(gameObject, "Ghost");
+            time = 0;
         }
-        if (Spone.BatRcnt > 0)
+
+        //目的のタグを持つやつがいるか判定
+        if (nearObj != null)
         {
-            if (Vector2.Distance(GameObject.Find("BatR(Clone)").transform.position, transform.position) < 6.5f)
-            {
-                ypos.z = 10;
-                Hockenswitch = true;
-            }
-            else
-            {
-                if (Smoke.trgsSmoke == false)
-                {
-                    ypos.z = 10;
-                    Hockenswitch = false;
-                }
-            }
-
-
-
-
-
-            time += Time.deltaTime;
-
-            if (time >= 1.0f)
-            {
-                //Ghostのタグを持ってるやつを取得
-                nearObj = serchTag(gameObject, "Ghost");
-                time = 0;
-            }
-
-            //目的のタグを持つやつがいるか判定
-            if (nearObj != null)
-            {
-                GhostTracking();
-            }
-            else
-            {
-
-            }
-            GameObject.Find("Yokoari").transform.position = ypos;
-            Position = transform.position;
+            GhostTracking();
+        }
+        else
+        {
 
         }
+
+        //コウモリの処理
+        aveBat();
+
     }
-
-
 
     //指定されたタグの中で最も近いやつを取得
     GameObject serchTag(GameObject nowObj, string tagName)
@@ -147,7 +125,75 @@ public class Yokoari : MonoBehaviour
         transform.position = nowPos;
     }
 
+    void aveBat()
+    {
+        Vector3 ypos = GameObject.Find("Yokoari").transform.position;
 
+        if (Spone.BatLcnt > 0)
+        {
+            if (Vector2.Distance(GameObject.Find("BatL(Clone)").transform.position, transform.position) < 6.5f)
+            {
+                ypos.z = 10;
+                Hockenswitch = true;
+            }
+            else
+            {
+                if (Smoke.trgsSmoke == false)
+                {
+                    ypos.z = 10;
+                    Hockenswitch = false;
+                }
+            }
+        }
+        if (Spone.BatRcnt > 0)
+        {
+            if (Vector2.Distance(GameObject.Find("BatR(Clone)").transform.position, transform.position) < 6.5f)
+            {
+                ypos.z = 10;
+                Hockenswitch = true;
+            }
+            else
+            {
+                if (Smoke.trgsSmoke == false)
+                {
+                    ypos.z = 10;
+                    Hockenswitch = false;
+                }
+            }
+        }
 
+        GameObject.Find("Yokoari").transform.position = ypos;
+        Position = transform.position;
+    }
+
+    void Animation()
+    {
+
+        //通常時
+        if (idleState == true)
+        {
+            animator.Play("Idle");
+        }
+
+        else
+        //オバケが出現したときのやつ
+        if (squatState == true)
+        {
+            animator.Play("Squat");
+        }
+        
+        else
+        //火が出たときのやつ
+        if(supriseState == true)
+        {
+            animator.Play("Suprise");
+        }
+
+    }
+
+    private void ReplaceMaterial(Material mat)
+    {
+        GetComponent<Renderer>().material = mat;
+    }
 
 }
