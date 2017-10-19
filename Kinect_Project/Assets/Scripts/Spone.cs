@@ -24,6 +24,9 @@ public class Spone : MonoBehaviour
     public bool trgFire = false;
     public bool trgShine = false;
 
+    //インターバルのやつ
+    public bool trgInterval = false;    //trueでポーズが反応しない
+                                        //falseでポーズが反応する
     //コウモリの出ている数
     public static int BatRcnt = 0;
     public static int BatLcnt = 0;
@@ -59,14 +62,26 @@ public class Spone : MonoBehaviour
     void Update()
     {
 
-        time -= Time.deltaTime;
-        if (time <= 0.0)
+        if (trgInterval == true)
+        {
+
+            time -= Time.deltaTime;
+            if (time <= 0.0)
+            {
+
+                //タイム管理
+                time = sTime;
+                trgInterval = false;
+            }
+
+        }
+
+        if (trgInterval == false)
         {
 
             //おばけ
             if (trgGhost == true)
             {
-
                 //おばけを三体生成
                 for (int i = 0; i <= 2; i++)
                 {
@@ -82,6 +97,7 @@ public class Spone : MonoBehaviour
                     Instantiate(ghost, new Vector3(x, y, z), Quaternion.identity);
                 }
 
+                trgInterval = true;
                 trgGhost = false;
             }
 
@@ -103,11 +119,12 @@ public class Spone : MonoBehaviour
                     }
                 }
 
+                trgInterval = true;
                 trgBatsR = false;
             }
 
 
-            
+
             if (trgBatsL == true)
             {
 
@@ -122,6 +139,8 @@ public class Spone : MonoBehaviour
                         Instantiate(batsL, new Vector3(x, y, z), Quaternion.identity);
                         BatLcnt++;
                     }
+
+                    trgInterval = true;
                     trgBatsL = false;
                 }
             }
@@ -146,6 +165,7 @@ public class Spone : MonoBehaviour
                     pumpkinFlg = false;
                 }
 
+                trgInterval = true;
                 trgPumpkin = false;
 
             }
@@ -166,72 +186,75 @@ public class Spone : MonoBehaviour
                 }
 
                 Debug.Log(count);
+
+                trgInterval = true;
                 trgCandy = false;
                 ONE = true;
 
             }
 
-            //タイム管理
-            time = sTime;
-        }
 
-
-        //火
-        if (trgFire == true)
-        {
-            if (fireswitch == false)
+            //火
+            if (trgFire == true)
             {
-                Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
+                if (fireswitch == false)
+                {
+                    Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
 
-                //ヨコアリくんのびっくりするアニメーションを開始する
-                FindObjectOfType<Yokoari>().idleState = false;
-                FindObjectOfType<Yokoari>().supriseState = true;
+                    //ヨコアリくんのびっくりするアニメーションを開始する
+                    FindObjectOfType<Yokoari>().idleState = false;
+                    FindObjectOfType<Yokoari>().supriseState = true;
 
-                fireswitch = true;
+                    trgInterval = true;
+                    fireswitch = true;
+                }
+                else
+                {
+                    GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
+                    firetime += Time.deltaTime;
+                }
             }
-            else
+            if (firetime > 5)
             {
-                GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
-                firetime += Time.deltaTime;
+                fireswitch = false;
+                firetime = 0;
+
+                trgFire = false;
+
+                //ヨコアリくんのびっくりするアニメーションを戻す
+                FindObjectOfType<Yokoari>().supriseState = false;
+                FindObjectOfType<Yokoari>().idleState = true;
+
+                Destroy(GameObject.Find("Fire(Clone)"));
             }
-        }
-        if (firetime > 5)
-        {
-            fireswitch = false;
-            firetime = 0;
-            trgFire = false;
 
-            //ヨコアリくんのびっくりするアニメーションを戻す
-            FindObjectOfType<Yokoari>().supriseState = false;
-            FindObjectOfType<Yokoari>().idleState = true;
-
-            Destroy(GameObject.Find("Fire(Clone)"));
-        }
-
-        //キラキラ
-        if (trgShine == true)
-        {
-            if (shineswitch == false)
+            //キラキラ
+            if (trgShine == true)
             {
+                if (shineswitch == false)
+                {
 
-                Instantiate(shine, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft], Quaternion.identity);
-                shineswitch = true;
+                    Instantiate(shine, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft], Quaternion.identity);
+
+                    trgInterval = true;
+                    shineswitch = true;
+                }
+                else
+                {
+                    GameObject.Find("Shine(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft];
+                    shinetime += Time.deltaTime;
+                }
             }
-            else
+            if (shinetime > 5)
             {
-                GameObject.Find("Shine(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft];
-                shinetime += Time.deltaTime;
+                shineswitch = false;
+                shinetime = 0;
+
+                trgShine = false;
+                Destroy(GameObject.Find("Shine(Clone)"));
             }
-        }
-        if (shinetime > 5)
-        {
-            shineswitch = false;
-            shinetime = 0;
-            trgShine = false;
-            Destroy(GameObject.Find("Shine(Clone)"));
+
         }
 
     }
-
-
 }
