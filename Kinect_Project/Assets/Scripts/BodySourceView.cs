@@ -321,7 +321,10 @@ public class BodySourceView : MonoBehaviour
     void ShineCreate()
     {
         if(bodyPos[(int)Kinect.JointType.ThumbLeft].y > bodyPos[(int)Kinect.JointType.HandLeft].y + 0.5f &&
-           bodyPos[(int)Kinect.JointType.HandLeft].z > bodyPos[(int)Kinect.JointType.ElbowLeft].z - 1.5f)
+           bodyPos[(int)Kinect.JointType.HandLeft].z > bodyPos[(int)Kinect.JointType.ElbowLeft].z - 1.5f &&
+           bodyPos[(int)Kinect.JointType.ThumbLeft].y > bodyPos[(int)Kinect.JointType.ElbowLeft].y + 0.5f &&
+           bodyPos[(int)Kinect.JointType.HandLeft].y > bodyPos[(int)Kinect.JointType.SpineBase].y &&
+           bodyPos[(int)Kinect.JointType.HandLeft].y < bodyPos[(int)Kinect.JointType.Neck].y)
         {
             FindObjectOfType<Spone>().trgShine = true;
         }
@@ -331,7 +334,9 @@ public class BodySourceView : MonoBehaviour
     {
         if (bodyPos[(int)Kinect.JointType.ThumbRight].y > bodyPos[(int)Kinect.JointType.HandRight].y + 0.5f &&
             bodyPos[(int)Kinect.JointType.HandRight].z < bodyPos[(int)Kinect.JointType.ElbowRight].z - 1.5f &&
-            bodyPos[(int)Kinect.JointType.ThumbRight].y > bodyPos[(int)Kinect.JointType.ElbowRight].y + 0.5f)
+            bodyPos[(int)Kinect.JointType.ThumbRight].y > bodyPos[(int)Kinect.JointType.ElbowRight].y + 0.5f &&
+            bodyPos[(int)Kinect.JointType.HandRight].y > bodyPos[(int)Kinect.JointType.SpineBase].y  &&
+            bodyPos[(int)Kinect.JointType.HandRight].y < bodyPos[(int)Kinect.JointType.Neck].y)
         {
             FindObjectOfType<Spone>().trgFire = true;
         }
