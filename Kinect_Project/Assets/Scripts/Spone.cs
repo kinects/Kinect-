@@ -180,7 +180,7 @@ public class Spone : MonoBehaviour
                         x = Random.Range(-20, 20);
                         y = Random.Range(15, 50);
                         z = 5f;
-                        Instantiate(candy, new Vector3(x, y, z), Quaternion.identity);
+                        Instantiate(candy, new Vector3(x, y, z), Quaternion.Euler(x,y,1f));
                     }
                     ONE = false;
                 }
