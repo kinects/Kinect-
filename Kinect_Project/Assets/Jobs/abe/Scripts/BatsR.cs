@@ -56,7 +56,7 @@ public class BatsR : MonoBehaviour
 
         // 現在の位置に加算減算を行ったPositionを代入する
         transform.position = Position;
-
+      
         if (Smoke.trgsSmoke == true)
         {
             Spone.BatRcnt = 0;
@@ -83,12 +83,14 @@ public class BatsR : MonoBehaviour
                 color.a = 0;
                 spRenderer.color = color;
             }
+            
             Smoke.trgsSmoke = false;
             Destroy(gameObject);
-        }
-
-
+          
     }
+
+
+}
 
     void OnTriggerEnter(Collider other)
     {
