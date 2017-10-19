@@ -20,7 +20,11 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
+<<<<<<< HEAD
   m_MinSize: {x: 950, y: 542}
+=======
+  m_MinSize: {x: 950, y: 392}
+>>>>>>> origin/sura
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -41,11 +45,19 @@ MonoBehaviour:
     x: 0
     y: 30
     width: 1536
+<<<<<<< HEAD
     height: 731
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
   controlID: 91
+=======
+    height: 730
+  m_MinSize: {x: 681, y: 342}
+  m_MaxSize: {x: 12006, y: 8042}
+  vertical: 0
+  controlID: 74
+>>>>>>> origin/sura
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -88,7 +100,11 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 303
+<<<<<<< HEAD
     height: 443
+=======
+    height: 442
+>>>>>>> origin/sura
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
@@ -114,14 +130,14 @@ MonoBehaviour:
     y: 443
     width: 1225
     height: 288
-  m_MinSize: {x: 232, y: 271}
-  m_MaxSize: {x: 10002, y: 10021}
-  m_ActualView: {fileID: 13}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 13}
   - {fileID: 18}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,8 +158,13 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1536
+<<<<<<< HEAD
     height: 781
   m_MinSize: {x: 950, y: 300}
+=======
+    height: 780
+  m_MinSize: {x: 950, y: 392}
+>>>>>>> origin/sura
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -205,11 +226,19 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1225
+<<<<<<< HEAD
     height: 731
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
   controlID: 92
+=======
+    height: 730
+  m_MinSize: {x: 404, y: 342}
+  m_MaxSize: {x: 8004, y: 8042}
+  vertical: 1
+  controlID: 75
+>>>>>>> origin/sura
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -229,11 +258,19 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1225
+<<<<<<< HEAD
     height: 443
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
   controlID: 93
+=======
+    height: 442
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
+  vertical: 0
+  controlID: 23
+>>>>>>> origin/sura
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -324,19 +361,34 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
+<<<<<<< HEAD
     - Assets/Plugins
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
   - Assets/Plugins
+=======
+    - Assets/Scripts
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets/Scripts
+>>>>>>> origin/sura
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\nwuser.DA\\Documents\\\u6388\u696D\\\u30BC\u30DF\uFF06\u9032\u7D1A\u5236\u4F5C\\\u30CF\u30ED\u30A6\u30A3\u30F3\\KInect-\\Kinect_Project"
   m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 94290000
     m_LastClickedID: 10644
     m_ExpandedIDs: 0000000010260000f426000024270000e22700002228000042280000242b00008a2f00008c2f00008e2f0000902f0000922f0000ffffff7f
+=======
+    scrollPos: {x: 0, y: 278}
+    m_SelectedIDs: 7e2b0000
+    m_LastClickedID: 11134
+    m_ExpandedIDs: 0000000010260000f426000024270000e22700002228000042280000222b0000602b0000882f00008a2f00008c2f00008e2f0000902f000000ca9a3bffffff7f
+>>>>>>> origin/sura
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: Animation
@@ -364,7 +416,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 0000000010260000f426000024270000e22700002228000042280000242b0000622b00008a2f00008c2f00008e2f0000902f0000922f0000
+=======
+    m_ExpandedIDs: 0000000010260000f426000024270000e22700002228000042280000222b0000602b0000882f00008a2f00008c2f00008e2f0000902f0000
+>>>>>>> origin/sura
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -389,10 +445,17 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
+<<<<<<< HEAD
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 46280000262b0000
+=======
+    m_SelectedInstanceIDs: dafbffff
+    m_LastClickedInstanceID: -1062
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: 
+>>>>>>> origin/sura
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -480,9 +543,15 @@ MonoBehaviour:
     height: 422
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 
     m_LastClickedID: 0
     m_ExpandedIDs: 0640feff8e40feffe842feffec42feff0c2cffffd23cffffd869ffffb470ffff8671ffffe273ffff3875ffff8476ffff1e77ffff7c79ffff8079ffffac80ffff5c82ffff1483ffff7085ffffc686fffff687ffff7688ffffd48affffd88affffd28dffff808fffff3890ffff9492ffffea93ffffde94ffff9695fffff297ffff4899ffff7e9afffffe9affff5c9dffff609dffff4a9fffff86a0ffff3ea1ffff9aa3fffff0a4ffff20a6ffffa0a6fffffea8ffff02a9ffff0aacffff8aacffffe8aeffffecaeffffb4baffff64bcffff1cbdffff78bfffffcec0ffffd0c1ffff88c2ffffe4c4ffff3ac6ffff28c7ffffe0c7ffff54c9ffff90caffff10cbffff90cbffffeecdfffff2cdffffbcd4ffff3cd5ffff9ad7ffff9ed7ffff7ae6ffffcce7ffff92e8ffff06eaffff42ebffffc0ebffff4eecffffaceeffffb0eeffff26f6ffffecf6ffff4af9ffff4ef9ffffe4fbffff00000000
+=======
+    m_SelectedIDs: dafbffff
+    m_LastClickedID: -1062
+    m_ExpandedIDs: dcfbffff00000000
+>>>>>>> origin/sura
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: BatR3D(Clone)
