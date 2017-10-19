@@ -132,7 +132,7 @@ public class Ghost : MonoBehaviour {
             FindObjectOfType<Yokoari>().idleState = true;
 
             //オバケの存在フラグをオフ
-            FindObjectOfType<GhostDestroy>().desCnt = 1;
+            Destroy(this.gameObject.transform.root.gameObject);
         }
 
     }
