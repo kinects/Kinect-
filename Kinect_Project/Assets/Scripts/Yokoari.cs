@@ -37,9 +37,10 @@ public class Yokoari : MonoBehaviour
         //変数にアニメーターを入れる
         animator = GetComponent(typeof(Animator)) as Animator;
 
+        /*
         //マテリアルを取得
         Material mat = GetComponent<Renderer>().material;
-
+        */
         //最も近かったオブジェクトを取得
         nearObj = serchTag(gameObject, "Ghost");
 
@@ -131,7 +132,7 @@ public class Yokoari : MonoBehaviour
 
         if (Spone.BatLcnt > 0)
         {
-            if (Vector2.Distance(GameObject.Find("BatL(Clone)").transform.position, transform.position) < 6.5f)
+            if (Vector2.Distance(GameObject.Find("BatL3D(Clone)").transform.position, transform.position) < 6.5f)
             {
                 ypos.z = 10;
                 Hockenswitch = true;
@@ -147,7 +148,7 @@ public class Yokoari : MonoBehaviour
         }
         if (Spone.BatRcnt > 0)
         {
-            if (Vector2.Distance(GameObject.Find("BatR(Clone)").transform.position, transform.position) < 6.5f)
+            if (Vector2.Distance(GameObject.Find("BatR3D(Clone)").transform.position, transform.position) < 6.5f)
             {
                 ypos.z = 10;
                 Hockenswitch = true;
