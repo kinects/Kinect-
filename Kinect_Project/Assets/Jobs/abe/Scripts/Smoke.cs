@@ -27,33 +27,37 @@ public class Smoke : MonoBehaviour
             time++;
             if (time == 10)
             {
-                Instantiate(smoke, new Vector3(0, 0, -1), Quaternion.identity);
+                Instantiate(smoke, new Vector3(1, 0, 3), Quaternion.identity);
                 smokecnt++;
             }
             if (time == 20)
             {
-                Instantiate(smoke, new Vector3(-1f, -1.5f, -1), Quaternion.identity);
-                smokecnt++;
-                
+                Instantiate(smoke, new Vector3(0, -0.5f, 3), Quaternion.identity);
+                smokecnt++;             
             }
             if (time == 30)
             {
-                Instantiate(smoke, new Vector3(1f, -1.5f, -1), Quaternion.identity);
+                Instantiate(smoke, new Vector3(2, -0.5f, 3), Quaternion.identity);
                 smokecnt++;
             }
             if (time == 40)
             {
-                Instantiate(smoke, new Vector3(1.3f, 0.7f, -1), Quaternion.identity);
+                Instantiate(smoke, new Vector3(2.3f, 0.7f, 3), Quaternion.identity);
                 smokecnt++;
             }
             if (time == 50)
             {
-                Instantiate(smoke, new Vector3(-1.3f, 0.7f, -1), Quaternion.identity);
+                Instantiate(smoke, new Vector3(-0.3f, 0.7f, 3), Quaternion.identity);
                 smokecnt++;
             }
             if (time == 60)
             {
-                Instantiate(smoke, new Vector3(0, 3, -1), Quaternion.identity);
+                Instantiate(smoke, new Vector3(1, 1, 3), Quaternion.identity);
+                smokecnt++;
+            }
+            if (time == 70)
+            {
+                Instantiate(smoke, new Vector3(1, -1, 3), Quaternion.identity);
                 smokecnt++;
             }
             if (time > 120)
