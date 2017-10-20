@@ -192,6 +192,7 @@ public class Spone : MonoBehaviour
                 trgCandy = false;
                 ONE = true;
 
+<<<<<<< HEAD
             }       
 
         }
@@ -200,6 +201,13 @@ public class Spone : MonoBehaviour
         if (trgFire == true)
         {
             if (fireswitch == false)
+=======
+            }
+        }
+
+        //火
+        if (trgFire == true)
+>>>>>>> origin/okamooto
             {
                 Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
 
@@ -254,9 +262,13 @@ public class Spone : MonoBehaviour
             shineswitch = false;
             shinetime = 0;
 
+<<<<<<< HEAD
             trgShine = false;
             Destroy(GameObject.Find("Shine(Clone)"));
         }
+=======
+       
+>>>>>>> origin/okamooto
 
     }
 }
