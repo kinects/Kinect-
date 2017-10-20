@@ -8,6 +8,7 @@ public class pumpkinMove : MonoBehaviour
 
     private bool grabFlg = false;
     private Vector3 pumpkinPos;
+    private bool moveFlg = true;
     public float len = 0;
     public float len2 = 0;
     private float desTime;
@@ -20,6 +21,12 @@ public class pumpkinMove : MonoBehaviour
         {
             Destroy(gameObject);
             Spone.pumpkinFlg = true;
+        }
+
+        //かぼちゃがテーブルに当たったら
+        if (other.tag == "Table")
+        {
+            Destroy(gameObject);
         }
     }
 
