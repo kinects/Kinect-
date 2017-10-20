@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Kinect = Windows.Kinect;
 
 public class Title : MonoBehaviour {
 
@@ -22,14 +23,17 @@ public class Title : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //if (Input.GetKey("Space"))
-        //{
-            circleAngle --;
-        //}
+        if (BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].y > BodySourceView.bodyPos[(int)Kinect.JointType.Head].y)
+        {
+            //if (Input.GetKey("Space"))
+            //{
+            circleAngle--;
+            //}
 
-        gage.transform.localEulerAngles = new Vector3(0, 0, circleAngle + 90);
-        gage.transform.position = circlePos + new Vector3(Mathf.Cos(circleAngle * 3.14f / 180f) * circleScale,
-                                                          Mathf.Sin(circleAngle * 3.14f / 180f) * circleScale, 0);
+            gage.transform.localEulerAngles = new Vector3(0, 0, circleAngle + 90);
+            gage.transform.position = circlePos + new Vector3(Mathf.Cos(circleAngle * 3.14f / 180f) * circleScale,
+                                                              Mathf.Sin(circleAngle * 3.14f / 180f) * circleScale, 0);
+        }
 
 	}
 }
