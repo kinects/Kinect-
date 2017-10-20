@@ -94,6 +94,7 @@
     <Compile Include="Assets\Jobs\Gozi\pumpkinMove.cs" />
     <Compile Include="Assets\Jobs\Sura\Scripts\Ghost.cs" />
     <Compile Include="Assets\Jobs\Sura\Scripts\Title.cs" />
+    <Compile Include="Assets\Jobs\abe\Scripts\Balloon.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\BatsL.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\BatsR.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\Hocken.cs" />
