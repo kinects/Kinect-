@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Kinect = Windows.Kinect;
 using UnityEngine.SceneManagement;
 
-public class BodySourceView : MonoBehaviour 
+public class BodySourceView : MonoBehaviour
 {
     public Material BoneMaterial;
     public GameObject BodySourceManager;
@@ -14,7 +14,7 @@ public class BodySourceView : MonoBehaviour
 
     public static Vector3[] bodyPos = new Vector3[25];
     private ulong active = 0;
-    
+
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
 
@@ -28,9 +28,7 @@ public class BodySourceView : MonoBehaviour
     public float len = 0;
     public float len2 = 0;
 
-
-
-
+    public float combo_time = 60;
 
     public float a;
 
@@ -40,26 +38,26 @@ public class BodySourceView : MonoBehaviour
         { Kinect.JointType.AnkleLeft, Kinect.JointType.KneeLeft },
         { Kinect.JointType.KneeLeft, Kinect.JointType.HipLeft },
         { Kinect.JointType.HipLeft, Kinect.JointType.SpineBase },
-        
+
         { Kinect.JointType.FootRight, Kinect.JointType.AnkleRight },
         { Kinect.JointType.AnkleRight, Kinect.JointType.KneeRight },
         { Kinect.JointType.KneeRight, Kinect.JointType.HipRight },
         { Kinect.JointType.HipRight, Kinect.JointType.SpineBase },
-        
+
         { Kinect.JointType.HandTipLeft, Kinect.JointType.HandLeft },
         { Kinect.JointType.ThumbLeft, Kinect.JointType.HandLeft },
         { Kinect.JointType.HandLeft, Kinect.JointType.WristLeft },
         { Kinect.JointType.WristLeft, Kinect.JointType.ElbowLeft },
         { Kinect.JointType.ElbowLeft, Kinect.JointType.ShoulderLeft },
         { Kinect.JointType.ShoulderLeft, Kinect.JointType.SpineShoulder },
-        
+
         { Kinect.JointType.HandTipRight, Kinect.JointType.HandRight },
         { Kinect.JointType.ThumbRight, Kinect.JointType.HandRight },
         { Kinect.JointType.HandRight, Kinect.JointType.WristRight },
         { Kinect.JointType.WristRight, Kinect.JointType.ElbowRight },
         { Kinect.JointType.ElbowRight, Kinect.JointType.ShoulderRight },
         { Kinect.JointType.ShoulderRight, Kinect.JointType.SpineShoulder },
-        
+
         { Kinect.JointType.SpineBase, Kinect.JointType.SpineMid },
         { Kinect.JointType.SpineMid, Kinect.JointType.SpineShoulder },
         { Kinect.JointType.SpineShoulder, Kinect.JointType.Neck },
@@ -67,46 +65,46 @@ public class BodySourceView : MonoBehaviour
     };
 
     public bool bodyTrg = false;
-    
-    void Update () 
+
+    void Update()
     {
         if (BodySourceManager == null)
         {
             return;
         }
-        
+
         _BodyManager = BodySourceManager.GetComponent<BodySourceManager>();
         if (_BodyManager == null)
         {
             return;
         }
-        
+
         Kinect.Body[] data = _BodyManager.GetData();
         if (data == null)
         {
             return;
         }
-        
+
         List<ulong> trackedIds = new List<ulong>();
-        foreach(var body in data)
+        foreach (var body in data)
         {
             if (body == null)
             {
                 continue;
-              }
-                
-            if(body.IsTracked)
+            }
+
+            if (body.IsTracked)
             {
-                trackedIds.Add (body.TrackingId);
+                trackedIds.Add(body.TrackingId);
             }
         }
-        
+
         List<ulong> knownIds = new List<ulong>(_Bodies.Keys);
-        
+
         // First delete untracked bodies
-        foreach(ulong trackingId in knownIds)
+        foreach (ulong trackingId in knownIds)
         {
-            if(!trackedIds.Contains(trackingId))
+            if (!trackedIds.Contains(trackingId))
             {
                 Destroy(_Bodies[trackingId]);
                 _Bodies.Remove(trackingId);
@@ -114,22 +112,22 @@ public class BodySourceView : MonoBehaviour
             }
         }
 
-        foreach(var body in data)
+        foreach (var body in data)
         {
             if (body == null)
             {
                 active = 0;
                 continue;
             }
-            
-            if(body.IsTracked && (active == body.TrackingId || active == 0))
+
+            if (body.IsTracked && (active == body.TrackingId || active == 0))
             {
-                if(!_Bodies.ContainsKey(body.TrackingId))
+                if (!_Bodies.ContainsKey(body.TrackingId))
                 {
                     _Bodies[body.TrackingId] = CreateBodyObject(body.TrackingId);
                     //flg = true;
                 }
-                
+
                 RefreshBodyObject(body, _Bodies[body.TrackingId]);
                 active = body.TrackingId;
             }
@@ -141,11 +139,10 @@ public class BodySourceView : MonoBehaviour
         if (bodyTrg == true)
         {
 
-            if (Application.loadedLevelName != "MainScene")
+            if(Application.loadedLevelName != "MainScene")
             {
                 TitlePause();
             }
-
             PumpkinCreate();
 
             CandyCreate();
@@ -161,27 +158,27 @@ public class BodySourceView : MonoBehaviour
             ShineCreate();
 
             GameEnd();
-        
+
         }
 
 
 
     }
-    
+
     //体を認識してボーンを生成する
     private GameObject CreateBodyObject(ulong id)
     {
         GameObject body = new GameObject("Body:" + id);
-        
+
         for (Kinect.JointType jt = Kinect.JointType.SpineBase; jt <= Kinect.JointType.ThumbRight; jt++)
         {
             GameObject jointObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            
+
             LineRenderer lr = jointObj.AddComponent<LineRenderer>();
             lr.SetVertexCount(2);
             lr.material = BoneMaterial;
             lr.SetWidth(0.5f, 0.5f);
-            
+
             jointObj.transform.localScale = new Vector3(0f, 0f, 0f);
             jointObj.name = jt.ToString();
             jointObj.transform.parent = body.transform;
@@ -190,10 +187,10 @@ public class BodySourceView : MonoBehaviour
         }
 
         bodyTrg = true;
-        
+
         return body;
     }
-    
+
     private void RefreshBodyObject(Kinect.Body body, GameObject bodyObject)
     {
 
@@ -207,8 +204,8 @@ public class BodySourceView : MonoBehaviour
         {
             Kinect.Joint sourceJoint = body.Joints[jt];
             Kinect.Joint? targetJoint = null;
-            
-            if(_BoneMap.ContainsKey(jt))
+
+            if (_BoneMap.ContainsKey(jt))
             {
                 targetJoint = body.Joints[_BoneMap[jt]];
             }
@@ -220,39 +217,39 @@ public class BodySourceView : MonoBehaviour
 
             jointObj.localPosition += new Vector3((0.25f), 0, 0);
             jointObj.localPosition += new Vector3((jointObj.localPosition.x) * a, 0, 0);
-            
+
             bodyPos[(int)jt] = jointObj.position;
             joycnt++;
-            
+
             LineRenderer lr = jointObj.GetComponent<LineRenderer>();
-            if(targetJoint.HasValue)
+            if (targetJoint.HasValue)
             {
                 lr.SetPosition(0, jointObj.localPosition);
                 lr.SetPosition(1, (GetVector3FromJoint(targetJoint.Value) + new Vector3((0.25f), 0, 0)) + new Vector3((GetVector3FromJoint(targetJoint.Value).x + 0.25f) * a, 0, 0));
-                lr.SetColors(GetColorForState (sourceJoint.TrackingState), GetColorForState(targetJoint.Value.TrackingState));
+                lr.SetColors(GetColorForState(sourceJoint.TrackingState), GetColorForState(targetJoint.Value.TrackingState));
             }
-            
+
             lr.enabled = false;
-           
+
         }
-        
+
     }
-    
+
     private static Color GetColorForState(Kinect.TrackingState state)
     {
         switch (state)
         {
-        case Kinect.TrackingState.Tracked:
-            return Color.green;
+            case Kinect.TrackingState.Tracked:
+                return Color.green;
 
-        case Kinect.TrackingState.Inferred:
-            return Color.red;
+            case Kinect.TrackingState.Inferred:
+                return Color.red;
 
-        default:
-            return Color.black;
+            default:
+                return Color.black;
         }
     }
-    
+
     private static Vector3 GetVector3FromJoint(Kinect.Joint joint)
     {
         return new Vector3(joint.Position.X * 10, joint.Position.Y * 10, joint.Position.Z * 10);
@@ -266,7 +263,7 @@ public class BodySourceView : MonoBehaviour
             bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.Head].y &&
             bodyPos[(int)Kinect.JointType.HandRight].y <= bodyPos[(int)Kinect.JointType.Head].y + 1 &&
             bodyPos[(int)Kinect.JointType.HandLeft].x <= bodyPos[(int)Kinect.JointType.SpineBase].x &&
-            bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.SpineMid].y)
+            bodyPos[(int)Kinect.JointType.HandLeft].y <= bodyPos[(int)Kinect.JointType.SpineMid].y)
         {
             FindObjectOfType<Spone>().trgBatsR = true;
             //Debug.Log("いいぞ。");
@@ -285,10 +282,10 @@ public class BodySourceView : MonoBehaviour
             bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.Head].y &&
             bodyPos[(int)Kinect.JointType.HandLeft].y <= bodyPos[(int)Kinect.JointType.Head].y + 1 &&
             bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineBase].x &&
-            bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.SpineMid].y)
+            bodyPos[(int)Kinect.JointType.HandRight].y <= bodyPos[(int)Kinect.JointType.SpineMid].y)
         {
             FindObjectOfType<Spone>().trgBatsL = true;
-            //Debug.Log("いいぞ。2");
+
         }
         else
         {
@@ -324,7 +321,7 @@ public class BodySourceView : MonoBehaviour
     //キラキラを出現させる
     void ShineCreate()
     {
-        if(bodyPos[(int)Kinect.JointType.ThumbLeft].y > bodyPos[(int)Kinect.JointType.HandLeft].y + 0.5f &&
+        if (bodyPos[(int)Kinect.JointType.ThumbLeft].y > bodyPos[(int)Kinect.JointType.HandLeft].y + 0.5f &&
            bodyPos[(int)Kinect.JointType.HandLeft].z > bodyPos[(int)Kinect.JointType.ElbowLeft].z - 1.5f &&
            bodyPos[(int)Kinect.JointType.ThumbLeft].y > bodyPos[(int)Kinect.JointType.ElbowLeft].y + 0.5f &&
            bodyPos[(int)Kinect.JointType.HandLeft].y > bodyPos[(int)Kinect.JointType.SpineBase].y &&
@@ -339,7 +336,7 @@ public class BodySourceView : MonoBehaviour
         if (bodyPos[(int)Kinect.JointType.ThumbRight].y > bodyPos[(int)Kinect.JointType.HandRight].y + 0.5f &&
             bodyPos[(int)Kinect.JointType.HandRight].z < bodyPos[(int)Kinect.JointType.ElbowRight].z - 1.5f &&
             bodyPos[(int)Kinect.JointType.ThumbRight].y > bodyPos[(int)Kinect.JointType.ElbowRight].y + 0.5f &&
-            bodyPos[(int)Kinect.JointType.HandRight].y > bodyPos[(int)Kinect.JointType.SpineBase].y  &&
+            bodyPos[(int)Kinect.JointType.HandRight].y > bodyPos[(int)Kinect.JointType.SpineBase].y &&
             bodyPos[(int)Kinect.JointType.HandRight].y < bodyPos[(int)Kinect.JointType.Neck].y)
         {
             FindObjectOfType<Spone>().trgFire = true;
@@ -349,7 +346,7 @@ public class BodySourceView : MonoBehaviour
     void PumpkinCreate()
     {
         if (bodyPos[(int)Kinect.JointType.ElbowRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
-               bodyPos[(int)Kinect.JointType.ElbowLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
+            bodyPos[(int)Kinect.JointType.ElbowLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
         {
             FindObjectOfType<Spone>().trgPumpkin = true;
         }
@@ -368,23 +365,30 @@ public class BodySourceView : MonoBehaviour
 
         len2 = ((bodyPos[(int)Kinect.JointType.HandTipRight].x - bodyPos[(int)Kinect.JointType.HandTipLeft].x) * (bodyPos[(int)Kinect.JointType.HandRight].x - bodyPos[(int)Kinect.JointType.HandTipLeft].x) +
                (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.HandTipLeft].y) - (bodyPos[(int)Kinect.JointType.HandTipRight].y - bodyPos[(int)Kinect.JointType.HandTipLeft].y));
-        if (Mathf.Sqrt(len) <= 0.5f && Mathf.Sqrt(len2) <= 1.0f)
+
+        if (Spone.pumpkinComboFlg == true)
         {
-            Debug.Log("皿");
-            FindObjectOfType<Spone>().trgCandy = true;
+            if (Mathf.Sqrt(len) <= 0.5f && Mathf.Sqrt(len2) <= 1.0f)
+            {
+                Debug.Log("皿");
+                FindObjectOfType<Spone>().trgCandy = true;
+            }
+            else
+            {
+                FindObjectOfType<Spone>().trgCandy = false;
+            }
         }
         else
         {
             FindObjectOfType<Spone>().trgCandy = false;
         }
-
     }
 
+    //右手を上げたらゲームスタート
     void TitlePause()
     {
-        //がおーポーズ(右手が上)
         if (bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineBase].x &&
-            bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.Head].y )
+          bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.Head].y)
         {
             FindObjectOfType<Title>().titleTrg = true;
             //Debug.Log("いいぞ。");
@@ -393,33 +397,19 @@ public class BodySourceView : MonoBehaviour
         {
             FindObjectOfType<Title>().titleTrg = false;
         }
-    }
 
+    }
     //ゲームを終了させる
     void GameEnd()
     {
-        //横に手を広げている時
-        if (bodyPos[(int)Kinect.JointType.ShoulderLeft].x > bodyPos[(int)Kinect.JointType.HandLeft].x + 2 &&
-            bodyPos[(int)Kinect.JointType.ShoulderRight].x < bodyPos[(int)Kinect.JointType.HandRight].x - 2 &&
-           (bodyPos[(int)Kinect.JointType.HandLeft].y < bodyPos[(int)Kinect.JointType.SpineShoulder].y + 2 &&
-            bodyPos[(int)Kinect.JointType.HandLeft].y > bodyPos[(int)Kinect.JointType.SpineShoulder].y - 2) &&
-           (bodyPos[(int)Kinect.JointType.HandRight].y < bodyPos[(int)Kinect.JointType.SpineShoulder].y + 2 &&
-            bodyPos[(int)Kinect.JointType.HandRight].y > bodyPos[(int)Kinect.JointType.SpineShoulder].y - 2))
+        if (combo_time < 0)
         {
-            timeElapsed += Time.deltaTime;
+            Balloon.pa_balloon = true;
         }
         else
         {
-            timeElapsed = 0;
-        }
-
-        //約3秒経過したらメインシーンへ
-        if (timeElapsed > 3)                                               //約3秒経過したらメインシーンへ 
-        {
-            timeElapsed = 0;
-            SceneManager.LoadScene("ResultScene");
+            combo_time -= Time.deltaTime;
         }
     }
-
 }
 
