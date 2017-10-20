@@ -193,10 +193,10 @@ public class Spone : MonoBehaviour
                 ONE = true;
 
             }
+        }
 
-
-            //火
-            if (trgFire == true)
+        //火
+        if (trgFire == true)
             {
                 if (fireswitch == false)
                 {
@@ -255,7 +255,7 @@ public class Spone : MonoBehaviour
                 Destroy(GameObject.Find("Shine(Clone)"));
             }
 
-        }
+       
 
     }
 }
