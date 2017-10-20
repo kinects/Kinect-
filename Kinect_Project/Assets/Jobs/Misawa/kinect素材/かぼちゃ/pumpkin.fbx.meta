@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 1330d45564bb07542b4fb6e4a82d4ab4
-timeCreated: 1508470850
-=======
-guid: 1e522dfa03211b94cb080cffd750d64d
-timeCreated: 1508473643
->>>>>>> origin/Gozzilla
-licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -70,7 +63,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
