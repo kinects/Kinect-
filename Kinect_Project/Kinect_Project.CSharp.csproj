@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\BodySourceView.cs" />
     <Compile Include="Assets\Scripts\Spone.cs" />
     <Compile Include="Assets\Scripts\Yokoari.cs" />
+    <Compile Include="Assets\Scripts\YokoariChange.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AddTag.txt" />
