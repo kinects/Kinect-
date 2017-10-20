@@ -201,72 +201,64 @@ public class Spone : MonoBehaviour
         {
             if (fireswitch == false)
             {
+                Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
 
-
-            }
-        }
-
-        //火
-        if (trgFire == true)
-
-        {
-            Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
-
-            //ヨコアリくんのびっくりするアニメーションを開始する
-            FindObjectOfType<Yokoari>().idleState = false;
-            FindObjectOfType<Yokoari>().supriseState = true;
-
-            trgInterval = true;
-            time = 5;
-            fireswitch = true;
-        }
-        else
-        {
-            GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
-            firetime += Time.deltaTime;
-        }
-
-        if (firetime > 5)
-        {
-            fireswitch = false;
-            firetime = 0;
-
-            trgFire = false;
-
-            //ヨコアリくんのびっくりするアニメーションを戻す
-            FindObjectOfType<Yokoari>().supriseState = false;
-            FindObjectOfType<Yokoari>().idleState = true;
-
-            Destroy(GameObject.Find("Fire(Clone)"));
-        }
-
-        //キラキラ
-        if (trgShine == true)
-        {
-            if (shineswitch == false)
-            {
-
-                Instantiate(shine, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft], Quaternion.identity);
+                //ヨコアリくんのびっくりするアニメーションを開始する
+                FindObjectOfType<Yokoari>().idleState = false;
+                FindObjectOfType<Yokoari>().supriseState = true;
 
                 trgInterval = true;
                 time = 5;
-                shineswitch = true;
+                fireswitch = true;
             }
             else
             {
-                GameObject.Find("Shine(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft];
-                shinetime += Time.deltaTime;
+                GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
+                firetime += Time.deltaTime;
             }
-        }
-        if (shinetime > 5)
-        {
-            shineswitch = false;
-            shinetime = 0;
-            
-            trgShine = false;
-            Destroy(GameObject.Find("Shine(Clone)"));
-        }
-       
 
+            if (firetime > 5)
+            {
+                fireswitch = false;
+                firetime = 0;
+
+                trgFire = false;
+
+                //ヨコアリくんのびっくりするアニメーションを戻す
+                FindObjectOfType<Yokoari>().supriseState = false;
+                FindObjectOfType<Yokoari>().idleState = true;
+
+                Destroy(GameObject.Find("Fire(Clone)"));
+            }
+
+            //キラキラ
+            if (trgShine == true)
+            {
+                if (shineswitch == false)
+                {
+
+                    Instantiate(shine, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft], Quaternion.identity);
+
+                    trgInterval = true;
+                    time = 5;
+                    shineswitch = true;
+                }
+                else
+                {
+                    GameObject.Find("Shine(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft];
+                    shinetime += Time.deltaTime;
+                }
+            }
+            if (shinetime > 5)
+            {
+                shineswitch = false;
+                shinetime = 0;
+
+                trgShine = false;
+                Destroy(GameObject.Find("Shine(Clone)"));
+            }
+
+
+        }
     }
 }
