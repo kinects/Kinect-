@@ -26,6 +26,20 @@ public class Yokoari : MonoBehaviour
     public bool squatState = false;
     public bool supriseState = false;
 
+    //ヨコアリくんのモデル切り替えのやつ
+    public int indexTrg = 0;            //0 通常 1 ヴァンパイア 2 かぼちゃ 3 花
+
+    //透過度
+    float alpha;
+    float alpha02;
+    float alpha03;
+    float alpha04;
+
+    //色のやつ
+    float red, green, blue;
+    float red02, green02, blue02;
+    float red03, green03, blue03;
+
     private Vector2 Position;
     private SpriteRenderer spRenderer;
     public static bool Hockenswitch = false;
@@ -37,10 +51,9 @@ public class Yokoari : MonoBehaviour
         //変数にアニメーターを入れる
         animator = GetComponent(typeof(Animator)) as Animator;
 
-        /*
-        //マテリアルを取得
-        Material mat = GetComponent<Renderer>().material;
-        */
+        //マテリアルの色を取得
+        RendColor();
+
         //最も近かったオブジェクトを取得
         nearObj = serchTag(gameObject, "Ghost");
 
@@ -52,7 +65,33 @@ public class Yokoari : MonoBehaviour
 
         //アニメーションを再生する
         Animation();
- 
+
+        switch (indexTrg)
+        {
+            case 0: //通常
+                    GetComponent<Renderer>().materials[0].color = new Color(red, green, blue, alpha);
+                    break;
+            case 1:
+                    //ヴァンパイア
+                    GetComponent<Renderer>().materials[0].color = new Color(red, green, blue, alpha02);
+                    break;
+            case 2:
+                    //かぼちゃ
+                    GetComponent<Renderer>().materials[0].color = new Color(red, green, blue, alpha03);
+                    break;
+            case 3:
+                    //花
+                    GetComponent<Renderer>().materials[0].color = new Color(red, green, blue, alpha04);
+                    break;
+            default:
+
+                    
+                    break;
+        }
+
+        //各モデルの透明度を制御
+        IndexAlpha();
+
 
         time += Time.deltaTime;
 
@@ -192,9 +231,59 @@ public class Yokoari : MonoBehaviour
 
     }
 
-    private void ReplaceMaterial(Material mat)
+    void RendColor()
     {
-        GetComponent<Renderer>().material = mat;
+
+            red = GetComponent<Renderer>().materials[0].color.r;
+            green = GetComponent<Renderer>().materials[0].color.g;
+            blue = GetComponent<Renderer>().materials[0].color.b;
+
+            red02 = GetComponent<Renderer>().materials[1].color.r;
+            green02 = GetComponent<Renderer>().materials[1].color.g;
+            blue02 = GetComponent<Renderer>().materials[1].color.b;
+
+            red03 = GetComponent<Renderer>().materials[2].color.r;
+            green03 = GetComponent<Renderer>().materials[2].color.g;
+            blue03 = GetComponent<Renderer>().materials[2].color.b;
+
+    }
+
+    void IndexAlpha()
+    {
+        switch (indexTrg)
+        {
+            case 0: //通常
+                alpha = 255;
+                alpha02 = 0;
+                alpha03 = 0;
+                alpha04 = 0;
+                break;
+            case 1:
+                //ヴァンパイア
+                alpha = 0;
+                alpha02 = 255;
+                alpha03 = 0;
+                alpha04 = 0;
+                break;
+            case 2:
+                //かぼちゃ
+                alpha = 0;
+                alpha02 = 0;
+                alpha03 = 255;
+                alpha04 = 0;
+                break;
+            case 3:
+                //花
+                alpha = 0;
+                alpha02 = 0;
+                alpha03 = 0;
+                alpha04 = 255;
+                break;
+            default:
+
+
+                break;
+        }
     }
 
 }

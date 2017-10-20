@@ -27,6 +27,7 @@ public class Spone : MonoBehaviour
     //インターバルのやつ
     public bool trgInterval = false;    //trueでポーズが反応しない
                                         //falseでポーズが反応する
+
     //コウモリの出ている数
     public static int BatRcnt = 0;
     public static int BatLcnt = 0;
