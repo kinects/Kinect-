@@ -114,7 +114,7 @@ public class Spone : MonoBehaviour
                         y = Random.Range(0, 4);
                         z = 10f;
 
-                        Instantiate(batsR, new Vector3(x, y, z), Quaternion.identity);
+                        Instantiate(batsR, new Vector3(x, y, z), Quaternion.Euler(0, 90, 0));
                         BatRcnt++;
                     }
                 }
@@ -136,7 +136,7 @@ public class Spone : MonoBehaviour
                         y = Random.Range(0, 4);
                         z = 10f;
 
-                        Instantiate(batsL, new Vector3(x, y, z), Quaternion.identity);
+                        Instantiate(batsL, new Vector3(x, y, z), Quaternion.Euler(0, 90, 0));
                         BatLcnt++;
                     }
 
