@@ -61,6 +61,7 @@ public class BatsR : MonoBehaviour
         {
             Spone.BatRcnt = 0;
             Smoke.trgsSmoke = false;
+            FindObjectOfType<YokoariChange>().indexTrg = 1;
             Destroy(gameObject);          
         }
 
