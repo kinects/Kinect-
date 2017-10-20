@@ -154,9 +154,9 @@ public class Spone : MonoBehaviour
             if (trgPumpkin == true)
             {
 
-                x = BodySourceView.bodyPos[(int)Kinect.JointType.SpineBase].x;
-                y = 3f;
-                z = 5f;
+                x = -2.7f;
+                y = -1.5f;
+                z = 5.5f;
 
 
                 //かぼちゃをつかむ
