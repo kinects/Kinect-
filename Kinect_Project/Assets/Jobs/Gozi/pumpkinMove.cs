@@ -26,6 +26,7 @@ public class pumpkinMove : MonoBehaviour
         //かぼちゃがテーブルに当たったら
         if (other.tag == "Table")
         {
+            Spone.pumpkinComboFlg = true;
             Destroy(gameObject);
         }
     }
@@ -70,12 +71,12 @@ public class pumpkinMove : MonoBehaviour
 
 
 
-        if (grabFlg == true && Mathf.Sqrt(len2) <= 1.5f)
+        if (grabFlg == true && Mathf.Sqrt(len2) <= 2.0f)
         {
             Debug.Log("hey");
             pumpkinPos.x = BodySourceView.bodyPos[(int)Kinect.JointType.WristRight].x;
             pumpkinPos.y = BodySourceView.bodyPos[(int)Kinect.JointType.WristRight].y;
-            pumpkinPos.z = 10f;
+            pumpkinPos.z = 5f;
         }
         else
         {

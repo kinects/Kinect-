@@ -41,6 +41,8 @@ public class Spone : MonoBehaviour
     //かぼちゃ出現フラグ
     public static bool pumpkinFlg = true;
 
+    public static bool pumpkinComboFlg = false;
+
     private int count = 0;
     private bool ONE = true;
     private float x = 0;
@@ -171,29 +173,34 @@ public class Spone : MonoBehaviour
 
             }
             //飴
-            if (trgCandy == true)
+            if (pumpkinComboFlg == true)
             {
-
-                if (ONE)
+                if (trgCandy == true)
                 {
-                    for (int i = 0; i <= 30; i++)
+
+                    if (ONE)
                     {
-                        x = Random.Range(-20, 20);
-                        y = Random.Range(15, 50);
-                        z = 5f;
-                        Instantiate(candy, new Vector3(x, y, z), Quaternion.Euler(x, y, 1f));
+                        for (int i = 0; i <= 30; i++)
+                        {
+                            x = Random.Range(-20, 20);
+                            y = Random.Range(15, 50);
+                            z = 5f;
+                            Instantiate(candy, new Vector3(x, y, z), Quaternion.Euler(x, y, 1f));
+                        }
+                        ONE = false;
                     }
-                    ONE = false;
+
+                    Debug.Log(count);
+
+                    trgInterval = true;
+                    trgCandy = false;
+
                 }
-
-                Debug.Log(count);
-
-                trgInterval = true;
-                trgCandy = false;
-                ONE = true;
-
             }
-
+            else
+            {
+                trgCandy = false;
+            }
         }
 
         //火
@@ -208,7 +215,6 @@ public class Spone : MonoBehaviour
                 FindObjectOfType<Yokoari>().supriseState = true;
 
                 trgInterval = true;
-                time = 5;
                 fireswitch = true;
             }
             else
@@ -216,49 +222,48 @@ public class Spone : MonoBehaviour
                 GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
                 firetime += Time.deltaTime;
             }
-
-            if (firetime > 5)
-            {
-                fireswitch = false;
-                firetime = 0;
-
-                trgFire = false;
-
-                //ヨコアリくんのびっくりするアニメーションを戻す
-                FindObjectOfType<Yokoari>().supriseState = false;
-                FindObjectOfType<Yokoari>().idleState = true;
-
-                Destroy(GameObject.Find("Fire(Clone)"));
-            }
-
-            //キラキラ
-            if (trgShine == true)
-            {
-                if (shineswitch == false)
-                {
-
-                    Instantiate(shine, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft], Quaternion.identity);
-
-                    trgInterval = true;
-                    time = 5;
-                    shineswitch = true;
-                }
-                else
-                {
-                    GameObject.Find("Shine(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft];
-                    shinetime += Time.deltaTime;
-                }
-            }
-            if (shinetime > 5)
-            {
-                shineswitch = false;
-                shinetime = 0;
-
-                trgShine = false;
-                Destroy(GameObject.Find("Shine(Clone)"));
-            }
-
-
         }
+        if (firetime > 5)
+        {
+            fireswitch = false;
+            firetime = 0;
+
+            trgFire = false;
+
+            //ヨコアリくんのびっくりするアニメーションを戻す
+            FindObjectOfType<Yokoari>().supriseState = false;
+            FindObjectOfType<Yokoari>().idleState = true;
+
+            Destroy(GameObject.Find("Fire(Clone)"));
+        }
+
+        //キラキラ
+        if (trgShine == true)
+        {
+            if (shineswitch == false)
+            {
+
+                Instantiate(shine, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft], Quaternion.identity);
+
+                trgInterval = true;
+                shineswitch = true;
+            }
+            else
+            {
+                GameObject.Find("Shine(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbLeft];
+                shinetime += Time.deltaTime;
+            }
+        }
+        if (shinetime > 5)
+        {
+            shineswitch = false;
+            shinetime = 0;
+
+            trgShine = false;
+            Destroy(GameObject.Find("Shine(Clone)"));
+        }
+
+
+
     }
 }

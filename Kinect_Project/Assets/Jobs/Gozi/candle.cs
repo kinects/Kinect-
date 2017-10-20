@@ -39,7 +39,7 @@ public class candle : MonoBehaviour
         {
             len = ((BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].x - candle1Pos.x) * (BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].x - candle1Pos.x) +
                (BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].y - candle1Pos.y) * (BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].y - candle1Pos.y));
-            if (Mathf.Sqrt(len) <= 10f)
+            if (Mathf.Sqrt(len) <= 3f)
             {
                 flame.SetActive(true);
             }
@@ -51,7 +51,7 @@ public class candle : MonoBehaviour
                (BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].y - candle2Pos.y) * (BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].y - candle2Pos.y));
         if (Spone.fireswitch == true)
         {
-            if (Mathf.Sqrt(len2) <= 0.5f)
+            if (Mathf.Sqrt(len2) <= 3f)
             {
                 flame2.SetActive(true);
             }
