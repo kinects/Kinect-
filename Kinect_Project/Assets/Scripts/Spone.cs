@@ -27,6 +27,7 @@ public class Spone : MonoBehaviour
     //インターバルのやつ
     public bool trgInterval = false;    //trueでポーズが反応しない
                                         //falseでポーズが反応する
+
     //コウモリの出ている数
     public static int BatRcnt = 0;
     public static int BatLcnt = 0;
@@ -114,7 +115,7 @@ public class Spone : MonoBehaviour
                         y = Random.Range(0, 4);
                         z = 10f;
 
-                        Instantiate(batsR, new Vector3(x, y, z), Quaternion.identity);
+                        Instantiate(batsR, new Vector3(x, y, z), Quaternion.Euler(0, 90, 0));
                         BatRcnt++;
                     }
                 }
@@ -136,7 +137,7 @@ public class Spone : MonoBehaviour
                         y = Random.Range(0, 4);
                         z = 10f;
 
-                        Instantiate(batsL, new Vector3(x, y, z), Quaternion.identity);
+                        Instantiate(batsL, new Vector3(x, y, z), Quaternion.Euler(0, 90, 0));
                         BatLcnt++;
                     }
 

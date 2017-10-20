@@ -37,10 +37,6 @@ public class Yokoari : MonoBehaviour
         //変数にアニメーターを入れる
         animator = GetComponent(typeof(Animator)) as Animator;
 
-        /*
-        //マテリアルを取得
-        Material mat = GetComponent<Renderer>().material;
-        */
         //最も近かったオブジェクトを取得
         nearObj = serchTag(gameObject, "Ghost");
 
@@ -52,7 +48,9 @@ public class Yokoari : MonoBehaviour
 
         //アニメーションを再生する
         Animation();
- 
+
+
+
 
         time += Time.deltaTime;
 
@@ -128,43 +126,174 @@ public class Yokoari : MonoBehaviour
 
     void aveBat()
     {
-        Vector3 ypos = GameObject.Find("Yokoari").transform.position;
-
-        if (Spone.BatLcnt > 0)
+        switch(FindObjectOfType<YokoariChange>().indexTrg)
         {
-            if (Vector2.Distance(GameObject.Find("BatL3D(Clone)").transform.position, transform.position) < 6.5f)
-            {
-                ypos.z = 10;
-                Hockenswitch = true;
-            }
-            else
-            {
-                if (Smoke.trgsSmoke == false)
-                {
-                    ypos.z = 10;
-                    Hockenswitch = false;
-                }
-            }
-        }
-        if (Spone.BatRcnt > 0)
-        {
-            if (Vector2.Distance(GameObject.Find("BatR3D(Clone)").transform.position, transform.position) < 6.5f)
-            {
-                ypos.z = 10;
-                Hockenswitch = true;
-            }
-            else
-            {
-                if (Smoke.trgsSmoke == false)
-                {
-                    ypos.z = 10;
-                    Hockenswitch = false;
-                }
-            }
-        }
 
-        GameObject.Find("Yokoari").transform.position = ypos;
-        Position = transform.position;
+            case 0:
+                Vector3 ypos = GameObject.Find("Yokoari").transform.position;
+
+                if (Spone.BatLcnt > 0)
+                {
+                    if (Vector2.Distance(GameObject.Find("BatL3D(Clone)").transform.position, transform.position) < 6.5f)
+                    {
+                        ypos.z = 10;
+                        Hockenswitch = true;
+                    }
+                    else
+                    {
+                        if (Smoke.trgsSmoke == false)
+                        {
+                            ypos.z = 10;
+                            Hockenswitch = false;
+                        }
+                    }
+                }
+                if (Spone.BatRcnt > 0)
+                {
+                    if (Vector2.Distance(GameObject.Find("BatR3D(Clone)").transform.position, transform.position) < 6.5f)
+                    {
+                        ypos.z = 10;
+                        Hockenswitch = true;
+                    }
+                    else
+                    {
+                        if (Smoke.trgsSmoke == false)
+                        {
+                            ypos.z = 10;
+                            Hockenswitch = false;
+                        }
+                    }
+                }
+
+                GameObject.Find("Yokoari").transform.position = ypos;
+                Position = transform.position;
+                break;
+                //--------------------------------------------------------------------------------------//
+            case 1:
+
+                Vector3 ypos02 = GameObject.Find("Vamp3D").transform.position;
+
+                if (Spone.BatLcnt > 0)
+                {
+                    if (Vector2.Distance(GameObject.Find("BatL3D(Clone)").transform.position, transform.position) < 6.5f)
+                    {
+                        ypos02.z = 10;
+                        Hockenswitch = true;
+                    }
+                    else
+                    {
+                        if (Smoke.trgsSmoke == false)
+                        {
+                            ypos02.z = 10;
+                            Hockenswitch = false;
+                        }
+                    }
+                }
+                if (Spone.BatRcnt > 0)
+                {
+                    if (Vector2.Distance(GameObject.Find("BatR3D(Clone)").transform.position, transform.position) < 6.5f)
+                    {
+                        ypos02.z = 10;
+                        Hockenswitch = true;
+                    }
+                    else
+                    {
+                        if (Smoke.trgsSmoke == false)
+                        {
+                            ypos02.z = 10;
+                            Hockenswitch = false;
+                        }
+                    }
+                }
+
+                GameObject.Find("Vamp3D").transform.position = ypos02;
+                Position = transform.position;
+                break;
+            //--------------------------------------------------------------------------------------//
+            case 2:
+
+                Vector3 ypos03 = GameObject.Find("Pumpkin3D").transform.position;
+
+                if (Spone.BatLcnt > 0)
+                {
+                    if (Vector2.Distance(GameObject.Find("BatL3D(Clone)").transform.position, transform.position) < 6.5f)
+                    {
+                        ypos03.z = 10;
+                        Hockenswitch = true;
+                    }
+                    else
+                    {
+                        if (Smoke.trgsSmoke == false)
+                        {
+                            ypos03.z = 10;
+                            Hockenswitch = false;
+                        }
+                    }
+                }
+                if (Spone.BatRcnt > 0)
+                {
+                    if (Vector2.Distance(GameObject.Find("BatR3D(Clone)").transform.position, transform.position) < 6.5f)
+                    {
+                        ypos03.z = 10;
+                        Hockenswitch = true;
+                    }
+                    else
+                    {
+                        if (Smoke.trgsSmoke == false)
+                        {
+                            ypos03.z = 10;
+                            Hockenswitch = false;
+                        }
+                    }
+                }
+
+                GameObject.Find("Pumpkin3D").transform.position = ypos03;
+                Position = transform.position;
+                break;
+            //--------------------------------------------------------------------------------------//
+            case 3:
+
+                Vector3 ypos04 = GameObject.Find("Flower3D").transform.position;
+
+                if (Spone.BatLcnt > 0)
+                {
+                    if (Vector2.Distance(GameObject.Find("BatL3D(Clone)").transform.position, transform.position) < 6.5f)
+                    {
+                        ypos04.z = 10;
+                        Hockenswitch = true;
+                    }
+                    else
+                    {
+                        if (Smoke.trgsSmoke == false)
+                        {
+                            ypos04.z = 10;
+                            Hockenswitch = false;
+                        }
+                    }
+                }
+                if (Spone.BatRcnt > 0)
+                {
+                    if (Vector2.Distance(GameObject.Find("BatR3D(Clone)").transform.position, transform.position) < 6.5f)
+                    {
+                        ypos04.z = 10;
+                        Hockenswitch = true;
+                    }
+                    else
+                    {
+                        if (Smoke.trgsSmoke == false)
+                        {
+                            ypos04.z = 10;
+                            Hockenswitch = false;
+                        }
+                    }
+                }
+
+                GameObject.Find("Flower3D").transform.position = ypos04;
+                Position = transform.position;
+                break;
+        }
+        //--------------------------------------------------------------------------------------//
+
     }
 
     void Animation()
@@ -192,9 +321,6 @@ public class Yokoari : MonoBehaviour
 
     }
 
-    private void ReplaceMaterial(Material mat)
-    {
-        GetComponent<Renderer>().material = mat;
-    }
+
 
 }

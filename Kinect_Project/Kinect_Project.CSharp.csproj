@@ -87,6 +87,7 @@
     <Compile Include="Assets\Jobs\Gozi\candle.cs" />
     <Compile Include="Assets\Jobs\Gozi\pumpkinMove.cs" />
     <Compile Include="Assets\Jobs\Sura\Scripts\Ghost.cs" />
+    <Compile Include="Assets\Jobs\Sura\Scripts\Title.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\BatsL.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\BatsR.cs" />
     <Compile Include="Assets\Jobs\abe\Scripts\Hocken.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\Scripts\BodySourceView.cs" />
     <Compile Include="Assets\Scripts\Spone.cs" />
     <Compile Include="Assets\Scripts\Yokoari.cs" />
+    <Compile Include="Assets\Scripts\YokoariChange.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AddTag.txt" />

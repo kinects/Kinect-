@@ -60,47 +60,21 @@ public class BatsR : MonoBehaviour
         if (Smoke.trgsSmoke == true)
         {
             Spone.BatRcnt = 0;
-            var color = spRenderer.color;
-
-            if (Hocken.DraSwitch == false)
-            {
-                spRenderer = GameObject.Find("Dracula").GetComponent<SpriteRenderer>();
-                color = spRenderer.color;
-                color.a = 255;
-                spRenderer.color = color;
-            }
-            if (Hocken.Hockenswitch == true)
-            {
-                spRenderer = GameObject.Find("Hocken").GetComponent<SpriteRenderer>();
-                color = spRenderer.color;
-                color.a = 0;
-                spRenderer.color = color;
-            }
-            else
-            {
-                spRenderer = GameObject.Find("Yokoari").GetComponent<SpriteRenderer>();
-                color = spRenderer.color;
-                color.a = 0;
-                spRenderer.color = color;
-            }
-            
             Smoke.trgsSmoke = false;
-            Destroy(gameObject);
-          
+            FindObjectOfType<YokoariChange>().indexTrg = 1;
+            Destroy(gameObject);          
+        }
+
+
     }
-
-
-}
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Yokoari")
         {
-            spRenderer = GetComponent<SpriteRenderer>();
-            var color = spRenderer.color;
-            color.a = 0;
-            spRenderer.color = color;
             Smoke.trgSmoke = true;
+            Position.z += 10;
+            transform.position = Position;
         }
     }
 }
