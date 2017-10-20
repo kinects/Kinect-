@@ -141,10 +141,6 @@ public class BodySourceView : MonoBehaviour
         if (bodyTrg == true)
         {
 
-            if (Application.loadedLevelName != "MainScene")
-            {
-                TitlePause();
-            }
 
             PumpkinCreate();
 
@@ -266,7 +262,7 @@ public class BodySourceView : MonoBehaviour
             bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.Head].y &&
             bodyPos[(int)Kinect.JointType.HandRight].y <= bodyPos[(int)Kinect.JointType.Head].y + 1 &&
             bodyPos[(int)Kinect.JointType.HandLeft].x <= bodyPos[(int)Kinect.JointType.SpineBase].x &&
-            bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.SpineMid].y)
+            bodyPos[(int)Kinect.JointType.HandLeft].y <= bodyPos[(int)Kinect.JointType.SpineMid].y)
         {
             FindObjectOfType<Spone>().trgBatsR = true;
             //Debug.Log("いいぞ。");
@@ -285,7 +281,7 @@ public class BodySourceView : MonoBehaviour
             bodyPos[(int)Kinect.JointType.HandLeft].y >= bodyPos[(int)Kinect.JointType.Head].y &&
             bodyPos[(int)Kinect.JointType.HandLeft].y <= bodyPos[(int)Kinect.JointType.Head].y + 1 &&
             bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineBase].x &&
-            bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.SpineMid].y)
+            bodyPos[(int)Kinect.JointType.HandRight].y <= bodyPos[(int)Kinect.JointType.SpineMid].y)
         {
             FindObjectOfType<Spone>().trgBatsL = true;
             //Debug.Log("いいぞ。2");
@@ -379,22 +375,6 @@ public class BodySourceView : MonoBehaviour
         }
 
     }
-
-    void TitlePause()
-    {
-        //がおーポーズ(右手が上)
-        if (bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineBase].x &&
-            bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.Head].y )
-        {
-            FindObjectOfType<Title>().titleTrg = true;
-            //Debug.Log("いいぞ。");
-        }
-        else
-        {
-            FindObjectOfType<Title>().titleTrg = false;
-        }
-    }
-
     //ゲームを終了させる
     void GameEnd()
     {
