@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -41,8 +41,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1520
     height: 765
+=======
+    width: 1536
+    height: 780
+>>>>>>> origin/sura
   m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
@@ -109,7 +114,11 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
+<<<<<<< HEAD
   controlID: 3384
+=======
+  controlID: 45
+>>>>>>> origin/sura
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +142,11 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
+<<<<<<< HEAD
   controlID: 3385
+=======
+  controlID: 46
+>>>>>>> origin/sura
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -157,7 +170,11 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
+<<<<<<< HEAD
   controlID: 3336
+=======
+  controlID: 47
+>>>>>>> origin/sura
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -366,20 +383,32 @@ MonoBehaviour:
     height: 411
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: d6060000
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: fc0cffff5ad7ffff8eebffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
       m_OriginalName: 
+=======
+    m_ExpandedIDs: 74f8ffffccfbffffdcfbffff00000000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: Flower3D
+      m_OriginalName: Flower3D
+>>>>>>> origin/sura
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
+<<<<<<< HEAD
       m_UserData: 0
+=======
+      m_UserData: 12244
+>>>>>>> origin/sura
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 11
@@ -423,9 +452,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.6434557, y: -1.1356858, z: 5.1114645}
+    m_Target: {x: 3.838004, y: -0.97441787, z: 17.849443}
     speed: 2
-    m_Value: {x: 0.6434557, y: -1.1356858, z: 5.1114645}
+    m_Value: {x: 3.838004, y: -0.97441787, z: 17.849443}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -448,6 +477,7 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
+<<<<<<< HEAD
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
     m_Value: {x: -0, y: 0, z: -0, w: -1}
@@ -455,6 +485,15 @@ MonoBehaviour:
     m_Target: 3.6382737
     speed: 2
     m_Value: 3.6382737
+=======
+    m_Target: {x: -0.022791293, y: -0.038383454, z: 0.0008757904, w: -0.9990027}
+    speed: 2
+    m_Value: {x: -0.022791294, y: -0.038383458, z: 0.0008757905, w: -0.99900275}
+  m_Size:
+    m_Target: 14.451756
+    speed: 2
+    m_Value: 14.451756
+>>>>>>> origin/sura
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -581,19 +620,34 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
+<<<<<<< HEAD
     - Assets/Scene
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
   - Assets/Scene
+=======
+    - Assets/Scripts
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets/Scripts
+>>>>>>> origin/sura
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\nwuser.DA\\Desktop\\\u5B66\u6821\\\u30BC\u30DF\\Hallowin!!!\\Kinect_Project"
   m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 191}
     m_SelectedIDs: f4360000
     m_LastClickedID: 14068
     m_ExpandedIDs: 000000002a340000c2360000ca36000014380000ffffff7f
+=======
+    scrollPos: {x: 0, y: 249}
+    m_SelectedIDs: 902e0000
+    m_LastClickedID: 11920
+    m_ExpandedIDs: 00000000182600002029000028290000ce290000982a0000fa2a000000ca9a3bffffff7f
+>>>>>>> origin/sura
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -621,7 +675,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 000000002a340000c2360000ca36000014380000ffffff7f
+=======
+    m_ExpandedIDs: 00000000182600002029000028290000982a0000
+>>>>>>> origin/sura
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -648,7 +706,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 80360000d6310000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
