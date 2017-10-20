@@ -181,7 +181,7 @@ public class Spone : MonoBehaviour
                         x = Random.Range(-20, 20);
                         y = Random.Range(15, 50);
                         z = 5f;
-                        Instantiate(candy, new Vector3(x, y, z), Quaternion.Euler(x,y,1f));
+                        Instantiate(candy, new Vector3(x, y, z), Quaternion.Euler(x, y, 1f));
                     }
                     ONE = false;
                 }
@@ -192,8 +192,7 @@ public class Spone : MonoBehaviour
                 trgCandy = false;
                 ONE = true;
 
-<<<<<<< HEAD
-            }       
+            }
 
         }
 
@@ -201,30 +200,32 @@ public class Spone : MonoBehaviour
         if (trgFire == true)
         {
             if (fireswitch == false)
-=======
+            {
+
+
             }
         }
 
         //火
         if (trgFire == true)
->>>>>>> origin/okamooto
-            {
-                Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
 
-                //ヨコアリくんのびっくりするアニメーションを開始する
-                FindObjectOfType<Yokoari>().idleState = false;
-                FindObjectOfType<Yokoari>().supriseState = true;
+        {
+            Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
 
-                trgInterval = true;
-                time = 5;
-                fireswitch = true;
-            }
-            else
-            {
-                GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
-                firetime += Time.deltaTime;
-            }
+            //ヨコアリくんのびっくりするアニメーションを開始する
+            FindObjectOfType<Yokoari>().idleState = false;
+            FindObjectOfType<Yokoari>().supriseState = true;
+
+            trgInterval = true;
+            time = 5;
+            fireswitch = true;
         }
+        else
+        {
+            GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
+            firetime += Time.deltaTime;
+        }
+
         if (firetime > 5)
         {
             fireswitch = false;
@@ -261,14 +262,11 @@ public class Spone : MonoBehaviour
         {
             shineswitch = false;
             shinetime = 0;
-
-<<<<<<< HEAD
+            
             trgShine = false;
             Destroy(GameObject.Find("Shine(Clone)"));
         }
-=======
        
->>>>>>> origin/okamooto
 
     }
 }

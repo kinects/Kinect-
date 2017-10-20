@@ -141,7 +141,8 @@ public class BodySourceView : MonoBehaviour
         if (bodyTrg == true)
         {
 
-            if (Application.loadedLevelName != "MainScene") {
+            if (Application.loadedLevelName != "MainScene")
+            {
                 TitlePause();
             }
 
