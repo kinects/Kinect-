@@ -8,7 +8,7 @@ public class BatsR : MonoBehaviour
 
     private float rad;
     public Vector2 speed = new Vector2(0.2f, 0.2f);
-    private Vector2 Position;
+    private Vector3 Position=new Vector3();
     public bool side = false;
 
     private SpriteRenderer spRenderer;
@@ -56,35 +56,13 @@ public class BatsR : MonoBehaviour
 
         // 現在の位置に加算減算を行ったPositionを代入する
         transform.position = Position;
-
+      
         if (Smoke.trgsSmoke == true)
         {
             Spone.BatRcnt = 0;
-            var color = spRenderer.color;
-
-            if (Hocken.DraSwitch == false)
-            {
-                spRenderer = GameObject.Find("Dracula").GetComponent<SpriteRenderer>();
-                color = spRenderer.color;
-                color.a = 255;
-                spRenderer.color = color;
-            }
-            if (Hocken.Hockenswitch == true)
-            {
-                spRenderer = GameObject.Find("Hocken").GetComponent<SpriteRenderer>();
-                color = spRenderer.color;
-                color.a = 0;
-                spRenderer.color = color;
-            }
-            else
-            {
-                spRenderer = GameObject.Find("Yokoari").GetComponent<SpriteRenderer>();
-                color = spRenderer.color;
-                color.a = 0;
-                spRenderer.color = color;
-            }
             Smoke.trgsSmoke = false;
-            Destroy(gameObject);
+            FindObjectOfType<YokoariChange>().indexTrg = 1;
+            Destroy(gameObject);          
         }
 
 
@@ -94,11 +72,9 @@ public class BatsR : MonoBehaviour
     {
         if (other.tag == "Yokoari")
         {
-            spRenderer = GetComponent<SpriteRenderer>();
-            var color = spRenderer.color;
-            color.a = 0;
-            spRenderer.color = color;
             Smoke.trgSmoke = true;
+            Position.z += 10;
+            transform.position = Position;
         }
     }
 }
