@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 117
+  controlID: 40
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
     y: 0
     width: 1536
     height: 781
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 71
+  controlID: 41
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 46
+  controlID: 42
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -252,15 +252,15 @@ MonoBehaviour:
     y: 0
     width: 922
     height: 442
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 12}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -324,19 +324,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts
+    - Assets/Jobs/abe/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Jobs/abe/Scripts
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: "C:\\Users\\nwuser.DA\\Desktop\\YDA H.29 \u524D\u671F\\\u30B2\u30FC\u30E0\u30BC\u30DF\\\u30E8\u30B3\u30A2\u30EA\u304F\u3093\u306E\u30CF\u30ED\u30A6\u30A3\u30F3\u30D1\u30FC\u30C6\u30A3\u30FC\\Yokoharo\\Kinect_Project"
+  m_LastProjectPath: "C:\\Users\\nwuser.DA\\Documents\\\u6388\u696D\\\u30BC\u30DF\uFF06\u9032\u7D1A\u5236\u4F5C\\\u30CF\u30ED\u30A6\u30A3\u30F3\\KInect-\\Kinect_Project"
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 469}
-    m_SelectedIDs: bc300000
-    m_LastClickedID: 12476
-    m_ExpandedIDs: 0000000058280000fa2800004e2b0000562b0000c42c0000c02d00005a2f0000163000007630000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 31}
+    m_SelectedIDs: 60340000
+    m_LastClickedID: 13408
+    m_ExpandedIDs: 00000000c43000004c310000463300004c3300005c340000203500006e3600000437000054370000ffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -364,7 +364,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000058280000fa2800004e2b0000562b0000c42c0000c02d00005a2f00001630000076300000
+    m_ExpandedIDs: 00000000c43000004c310000463300004c3300005c340000203500006e3600000437000054370000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -480,25 +480,25 @@ MonoBehaviour:
     height: 421
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: bcf0ffff
-    m_LastClickedID: -3908
-    m_ExpandedIDs: 92f6ffff00000000
+    m_SelectedIDs: 24380000
+    m_LastClickedID: 14372
+    m_ExpandedIDs: 1e9effff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: balloon
+      m_OriginalName: balloon
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 14372
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 4}
     m_SearchString: 
   m_ExpandedScenes:
   - MainScene
@@ -532,14 +532,14 @@ MonoBehaviour:
     width: 918
     height: 421
   m_SceneLighting: 1
-  lastFramingTime: 0
+  lastFramingTime: 235.79046439506175
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.11179745, y: 1.4758911, z: 0.6737499}
+    m_Target: {x: -2.76, y: -1.57, z: 5.15}
     speed: 2
-    m_Value: {x: -0.11179745, y: 1.4758911, z: 0.6737499}
+    m_Value: {x: -2.76, y: -1.57, z: 5.15}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -564,11 +564,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.21435739, y: 0.04890934, z: -0.010747758, w: -0.9754706}
     speed: 2
-    m_Value: {x: -0.21435744, y: 0.048909348, z: -0.01074776, w: -0.9754708}
+    m_Value: {x: -0.21435739, y: 0.04890934, z: -0.010747758, w: -0.9754706}
   m_Size:
-    m_Target: 16.417612
+    m_Target: 22
     speed: 2
-    m_Value: 16.417612
+    m_Value: 22
   m_Ortho:
     m_Target: 0
     speed: 2
