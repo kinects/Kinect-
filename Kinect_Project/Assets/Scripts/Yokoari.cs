@@ -296,6 +296,8 @@ public class Yokoari : MonoBehaviour
 
     }
 
+
+    
     void Animation()
     {
 

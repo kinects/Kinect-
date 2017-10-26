@@ -12,6 +12,13 @@ public class BodySourceView : MonoBehaviour
     public GameObject Pumpkin;
     public GameObject Candy;
 
+
+    public GameObject Title;
+    public bool startFlg = false;
+    private bool ONE = true;
+
+
+
     public static Vector3[] bodyPos = new Vector3[25];
     private ulong active = 0;
 
@@ -28,7 +35,9 @@ public class BodySourceView : MonoBehaviour
     public float len = 0;
     public float len2 = 0;
 
-    public float combo_time = 60;
+    public float combo_time;
+
+
 
     public float a;
 
@@ -65,6 +74,17 @@ public class BodySourceView : MonoBehaviour
     };
 
     public bool bodyTrg = false;
+
+    void Start()
+    {
+        //タイトルスタートの初期化
+        Title.SetActive(true);
+        FindObjectOfType<Title>().circle.SetActive(true);
+        FindObjectOfType<Title>().gage.SetActive(true);
+        startFlg = false;
+        ONE = true;
+
+    }
 
     void Update()
     {
@@ -133,32 +153,52 @@ public class BodySourceView : MonoBehaviour
             }
             Debug.Log(active);
         }
-
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
 
 
         if (bodyTrg == true)
         {
-
+            /*
             if(Application.loadedLevelName != "MainScene")
             {
                 TitlePause();
             }
-            PumpkinCreate();
+            */
+            //startFlgがfalseならTitle関数のみ起動elseならmain部分の関数起動
+            if(startFlg == false)
+            {
+                TitlePause();
+            }
 
-            CandyCreate();
+            if (startFlg == true)
+            {
+                if (ONE)
+                {
+                    //各タイトルに関連する部分のオブジェクトの表示管理
+                    Title.SetActive(false);
+                    FindObjectOfType<Title>().circle.SetActive(false);
+                    FindObjectOfType<Title>().gage.SetActive(false);
+                    ONE = false;
+                }
+                PumpkinCreate();
 
-            BatsCreateR();
+                CandyCreate();
 
-            BatsCreateL();
+                BatsCreateR();
 
-            GhostCreate();
+                BatsCreateL();
 
-            FireCreate();
+                GhostCreate();
 
-            ShineCreate();
+                FireCreate();
 
-            GameEnd();
+                ShineCreate();
 
+                GameEnd();
+            }
         }
 
 
@@ -179,7 +219,7 @@ public class BodySourceView : MonoBehaviour
             lr.material = BoneMaterial;
             lr.SetWidth(0.5f, 0.5f);
 
-            jointObj.transform.localScale = new Vector3(0f, 0f, 0f);
+            jointObj.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             jointObj.name = jt.ToString();
             jointObj.transform.parent = body.transform;
 
@@ -306,7 +346,8 @@ public class BodySourceView : MonoBehaviour
             bodyPos[(int)Kinect.JointType.HandRight].x <= bodyPos[(int)Kinect.JointType.ShoulderRight].x &&
             bodyPos[(int)Kinect.JointType.HandLeft].x >= bodyPos[(int)Kinect.JointType.ShoulderLeft].x &&
             bodyPos[(int)Kinect.JointType.HandTipRight].y <= bodyPos[(int)Kinect.JointType.HandRight].y + 1 &&
-            bodyPos[(int)Kinect.JointType.HandTipLeft].y <= bodyPos[(int)Kinect.JointType.HandLeft].y + 1)
+            bodyPos[(int)Kinect.JointType.HandTipLeft].y <= bodyPos[(int)Kinect.JointType.HandLeft].y + 1
+            ||Input.GetKeyDown(KeyCode.Alpha3))
         {
             FindObjectOfType<Spone>().trgGhost = true;
 
@@ -331,13 +372,15 @@ public class BodySourceView : MonoBehaviour
         }
     }
 
+    //火を出現
     void FireCreate()
     {
         if (bodyPos[(int)Kinect.JointType.ThumbRight].y > bodyPos[(int)Kinect.JointType.HandRight].y + 0.5f &&
             bodyPos[(int)Kinect.JointType.HandRight].z < bodyPos[(int)Kinect.JointType.ElbowRight].z - 1.5f &&
             bodyPos[(int)Kinect.JointType.ThumbRight].y > bodyPos[(int)Kinect.JointType.ElbowRight].y + 0.5f &&
             bodyPos[(int)Kinect.JointType.HandRight].y > bodyPos[(int)Kinect.JointType.SpineBase].y &&
-            bodyPos[(int)Kinect.JointType.HandRight].y < bodyPos[(int)Kinect.JointType.Neck].y)
+            bodyPos[(int)Kinect.JointType.HandRight].y < bodyPos[(int)Kinect.JointType.Neck].y ||
+            Input.GetKeyDown(KeyCode.Alpha4))
         {
             FindObjectOfType<Spone>().trgFire = true;
         }
@@ -346,7 +389,9 @@ public class BodySourceView : MonoBehaviour
     void PumpkinCreate()
     {
         if (bodyPos[(int)Kinect.JointType.ElbowRight].y >= bodyPos[(int)Kinect.JointType.ShoulderRight].y &&
-            bodyPos[(int)Kinect.JointType.ElbowLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y)
+            bodyPos[(int)Kinect.JointType.ElbowLeft].y >= bodyPos[(int)Kinect.JointType.ShoulderLeft].y
+            ||
+            Input.GetKeyDown(KeyCode.Alpha5))
         {
             FindObjectOfType<Spone>().trgPumpkin = true;
         }
@@ -368,7 +413,7 @@ public class BodySourceView : MonoBehaviour
 
         if (Spone.pumpkinComboFlg == true)
         {
-            if (Mathf.Sqrt(len) <= 0.5f && Mathf.Sqrt(len2) <= 1.0f)
+            if (Mathf.Sqrt(len) <= 0.5f && Mathf.Sqrt(len2) <= 1.0f|| Input.GetKeyDown(KeyCode.R))
             {
                 Debug.Log("皿");
                 FindObjectOfType<Spone>().trgCandy = true;
@@ -388,7 +433,8 @@ public class BodySourceView : MonoBehaviour
     void TitlePause()
     {
         if (bodyPos[(int)Kinect.JointType.HandRight].x >= bodyPos[(int)Kinect.JointType.SpineBase].x &&
-          bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.Head].y)
+          bodyPos[(int)Kinect.JointType.HandRight].y >= bodyPos[(int)Kinect.JointType.Head].y
+          || Input.GetKey(KeyCode.Alpha6))
         {
             FindObjectOfType<Title>().titleTrg = true;
             //Debug.Log("いいぞ。");
@@ -402,14 +448,18 @@ public class BodySourceView : MonoBehaviour
     //ゲームを終了させる
     void GameEnd()
     {
-        if (combo_time < 0)
+        /*
+        if (combo_time < 0 && combo_time > -1)
         {
+            combo_time -= 2;
             Balloon.pa_balloon = true;
         }
         else
         {
             combo_time -= Time.deltaTime;
         }
+        */
     }
+
 }
 

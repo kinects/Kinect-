@@ -17,8 +17,8 @@ public class YokoariChange : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        indexTrg = 0;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,7 +33,6 @@ public class YokoariChange : MonoBehaviour {
                 break;
 
             case 1:
-                model_time = 10;
                 normal.SetActive(false);
                 vamp.SetActive(true);
                 pumpkin.SetActive(false);
@@ -41,7 +40,6 @@ public class YokoariChange : MonoBehaviour {
                 break;
 
             case 2:
-                model_time = 10;
                 normal.SetActive(false);
                 vamp.SetActive(false);
                 pumpkin.SetActive(true);
@@ -49,7 +47,6 @@ public class YokoariChange : MonoBehaviour {
                 break;
 
             case 3:
-                model_time = 10;
                 normal.SetActive(false);
                 vamp.SetActive(false);
                 pumpkin.SetActive(false);

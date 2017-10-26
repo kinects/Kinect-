@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Kinect = Windows.Kinect;
+using UnityEngine.SceneManagement;
 
 public class Spone : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class Spone : MonoBehaviour
     public GameObject fire;
     public GameObject shine;
 
+    public GameObject cutcut;
+
+
     //フラグ
     public bool trgGhost = false;
     public bool trgBatsR = false;
@@ -22,11 +26,16 @@ public class Spone : MonoBehaviour
     public bool trgCandy = false;
     public bool trgPumpkin = false;
     public bool trgFire = false;
+    private float Fz=5.0f;
     public bool trgShine = false;
+
+    public bool candyFlg = false;
 
     //インターバルのやつ
     public bool trgInterval = false;    //trueでポーズが反応しない
                                         //falseでポーズが反応する
+
+    public float candyTime = 0;
 
     //コウモリの出ている数
     public static int BatRcnt = 0;
@@ -58,12 +67,28 @@ public class Spone : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        cutcut.SetActive(false);
+        pumpkinFlg = true;
+        pumpkinComboFlg = false;
+        fireswitch = false;
+        shineswitch = false;
+        candyTime = 0;
         time = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(pumpkinComboFlg == true)
+        {
+            cutcut.SetActive(true);
+        }
+
+        if(candyFlg == true)
+        {
+            GameEnd();
+        }
 
         if (trgInterval == true)
         {
@@ -105,16 +130,15 @@ public class Spone : MonoBehaviour
             }
 
             //コウモリ始め
-            if (trgBatsR == true)
+            if (trgBatsR == true && FindObjectOfType<YokoariChange>().indexTrg == 0)
             {
 
-                //生成
                 for (int i = 0; i <= 0; i++)
                 {
                     if (BatRcnt < 1)
                     {
                         x = 15;
-                        y = Random.Range(0, 4);
+                        y = 5;  //変更点、ランダムから５に固定
                         z = 10f;
 
                         Instantiate(batsR, new Vector3(x, y, z), Quaternion.Euler(0, 90, 0));
@@ -128,7 +152,7 @@ public class Spone : MonoBehaviour
 
 
 
-            if (trgBatsL == true)
+            if (trgBatsL == true && FindObjectOfType<YokoariChange>().indexTrg == 0)
             {
 
                 for (int i = 0; i <= 0; i++)
@@ -136,7 +160,7 @@ public class Spone : MonoBehaviour
                     if (BatLcnt < 1)
                     {
                         x = -15;
-                        y = Random.Range(0, 4);
+                        y = 5;	//上と同様
                         z = 10f;
 
                         Instantiate(batsL, new Vector3(x, y, z), Quaternion.Euler(0, 90, 0));
@@ -175,27 +199,32 @@ public class Spone : MonoBehaviour
             //飴
             if (pumpkinComboFlg == true)
             {
+                
                 if (trgCandy == true)
                 {
-
+                    
                     if (ONE)
                     {
-                        for (int i = 0; i <= 30; i++)
+                        for (int i = 0; i <= 40; i++)
                         {
-                            x = Random.Range(-20, 20);
+                            x = Random.Range(-1, 1);
                             y = Random.Range(15, 50);
                             z = 5f;
                             Instantiate(candy, new Vector3(x, y, z), Quaternion.Euler(x, y, 1f));
                         }
+                        candyFlg = true;
                         ONE = false;
+
                     }
 
                     Debug.Log(count);
 
-                    trgInterval = true;
-                    trgCandy = false;
+                    //trgInterval = true;
+                    //trgCandy = false;
+                    
 
                 }
+                
             }
             else
             {
@@ -208,19 +237,27 @@ public class Spone : MonoBehaviour
         {
             if (fireswitch == false)
             {
-                Instantiate(fire, BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight], Quaternion.identity);
+                Instantiate(fire,new Vector3(BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].x, BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].y,Fz), Quaternion.identity);
 
-                //ヨコアリくんのびっくりするアニメーションを開始する
+              /*  //ヨコアリくんのびっくりするアニメーションを開始する
                 FindObjectOfType<Yokoari>().idleState = false;
                 FindObjectOfType<Yokoari>().supriseState = true;
-
+                */
                 trgInterval = true;
                 fireswitch = true;
             }
             else
             {
-                GameObject.Find("Fire(Clone)").transform.position = BodySourceView.bodyPos[(int)Kinect.JointType.ThumbRight];
+                GameObject fire = GameObject.Find("Fire(Clone)");
+                Vector3 firePos = fire.transform.position;
+
+                firePos.x = BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].x;
+                firePos.y = BodySourceView.bodyPos[(int)Kinect.JointType.HandRight].y;
+                firePos.z = Fz;
+
                 firetime += Time.deltaTime;
+
+                fire.transform.position = firePos ;
             }
         }
         if (firetime > 5)
@@ -231,8 +268,8 @@ public class Spone : MonoBehaviour
             trgFire = false;
 
             //ヨコアリくんのびっくりするアニメーションを戻す
-            FindObjectOfType<Yokoari>().supriseState = false;
-            FindObjectOfType<Yokoari>().idleState = true;
+        /*    FindObjectOfType<Yokoari>().supriseState = false;
+            FindObjectOfType<Yokoari>().idleState = true;*/
 
             Destroy(GameObject.Find("Fire(Clone)"));
         }
@@ -265,5 +302,14 @@ public class Spone : MonoBehaviour
 
 
 
+    }
+
+    void GameEnd()
+    {
+        candyTime += 1;
+        if (candyTime >= 180)
+        {
+            SceneManager.LoadScene("ResultScene");
+        }
     }
 }
